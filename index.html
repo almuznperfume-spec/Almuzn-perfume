@@ -3015,10 +3015,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // إغلاق الشاشة بعد انتهاء الصوت
+    // إغلاق الشاشة بعد انتهاء الصوت، أو تلقائياً حتى دون لمس
     welcomeVoice.addEventListener("ended", closeIntro);
+    setTimeout(closeIntro, 5500);
 
-    // مستمع واحد فقط لكل الصفحة
+    // الصوت يبقى مرتبطاً بأول تفاعل كما كان، دون أن يمنع فتح المتجر
     document.addEventListener("click", firstInteraction);
 
 });
