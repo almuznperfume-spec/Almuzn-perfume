@@ -1,0 +1,1130 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>سلة التسوق | المزن للعطور</title>
+
+<style>
+:root {
+    --bg:#fff8f1;
+    --card:#fffdfb;
+    --soft:#f7e8da;
+    --text:#49200f;
+    --muted:#967765;
+    --main:#8d350d;
+    --gold:#c78a3d;
+    --line:#ead7c8;
+    --shadow:0 8px 24px #5e2a0f12;
+}
+body.dark {
+    --bg:#080706;
+    --card:#15110e;
+    --soft:#211912;
+    --text:#fff5e8;
+    --muted:#c3a98e;
+    --main:#e2a64f;
+    --gold:#e4aa51;
+    --line:#634322;
+    --shadow:0 8px 26px #0006;
+}
+* {box-sizing:border-box}
+html,body {
+    margin:0;
+    max-width:100%;
+    overflow-x:hidden;
+}
+body {
+    background:var(--bg);
+    color:var(--text);
+    font-family:Tahoma,Arial,sans-serif;
+    transition:.25s;
+}
+a {color:inherit;text-decoration:none}
+button {font:inherit;cursor:pointer}
+img {max-width:100%}
+.wrap {
+    width:min(1250px,95%);
+    margin:auto;
+}
+
+/* HEADER */
+.main-header {
+    background:var(--card);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 4px 20px #0000000a;
+    position:relative;
+    z-index:10;
+}
+.headin {
+    min-height:83px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.brand {
+    display:flex;
+    align-items:center;
+    gap:11px;
+    direction:ltr;
+    color:var(--main);
+}
+.brand-info {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.brandname {
+    color:#a94d19;
+    font-size:25px;
+    font-weight:900;
+    line-height:1.5;
+}
+.brand small {
+    color:#c78a3d;
+    font:bold 10px Georgia,serif;
+    letter-spacing:2.5px;
+}
+body.dark .brandname {color:#f0c47d}
+.brand-logo-frame {
+    width:100px;
+    height:100px;
+    min-width:100px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    border:1px solid #ead9bd;
+    border-radius:50%;
+    background:#fff;
+}
+.brand-logo {
+    width:125%;
+    height:125%;
+    max-width:none;
+    object-fit:contain;
+}
+.navigation-wrap {
+    display:flex;
+    justify-content:center;
+    padding:0 15px 13px;
+}
+.main-nav {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    padding:6px;
+    border:1px solid var(--line);
+    border-radius:50px;
+    background:var(--soft);
+}
+.main-nav a {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 21px;
+    border-radius:30px;
+    color:var(--text);
+    font-size:13px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+.main-nav a:hover,
+.main-nav a.active {
+    background:var(--main);
+    color:#fff;
+}
+body.dark .main-nav a.active {
+    background:var(--gold);
+    color:#241307;
+}
+.header-bottom {border-top:1px solid var(--line)}
+.header-bottom-inner {
+    min-height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    direction:ltr;
+}
+.header-actions,.header-settings {
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.tool {
+    width:40px;
+    height:40px;
+    display:inline-grid;
+    place-items:center;
+    padding:0;
+    border:1px solid var(--line);
+    border-radius:50%;
+    background:var(--card);
+    color:var(--text);
+    transition:.2s;
+}
+.tool:hover {
+    background:var(--soft);
+    border-color:var(--gold);
+}
+.tool svg {
+    width:20px;
+    height:20px;
+    stroke:currentColor;
+    stroke-width:1.7;
+    fill:none;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+#langBtn {
+    min-width:82px;
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:0 13px;
+    border:1px solid #c49a55;
+    border-radius:30px;
+    background:transparent;
+    color:var(--text);
+    font-weight:bold;
+}
+.language-icon {
+    width:20px;
+    height:20px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.6;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+/* MAIN */
+main {
+    min-height:60vh;
+    padding:30px 0 60px;
+}
+.breadcrumb {
+    margin-bottom:25px;
+    color:var(--muted);
+    font-size:13px;
+}
+.breadcrumb a {color:var(--main)}
+.page-title {
+    margin:0 0 8px;
+    font-size:30px;
+}
+.page-subtitle {
+    margin:0 0 28px;
+    color:var(--muted);
+    font-size:14px;
+}
+
+/* CART LAYOUT */
+.cart-layout {
+    display:grid;
+    grid-template-columns:minmax(0,1.7fr) minmax(300px,.8fr);
+    gap:25px;
+    align-items:start;
+}
+.cart-items {
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+.cart-item {
+    display:grid;
+    grid-template-columns:125px minmax(0,1fr) auto;
+    gap:20px;
+    align-items:center;
+    padding:18px;
+    border:1px solid var(--line);
+    border-radius:17px;
+    background:var(--card);
+    box-shadow:var(--shadow);
+}
+.item-image {
+    width:125px;
+    height:125px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    border-radius:13px;
+    background:var(--soft);
+}
+.item-image img {
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+.item-details h3 {
+    margin:0 0 8px;
+    font-size:18px;
+}
+.item-category {
+    display:inline-block;
+    margin-bottom:10px;
+    padding:5px 11px;
+    border-radius:20px;
+    background:var(--soft);
+    color:var(--main);
+    font-size:11px;
+}
+.item-price {
+    color:var(--main);
+    font-size:17px;
+    font-weight:900;
+}
+.item-old-price {
+    margin-inline-start:8px;
+    color:var(--muted);
+    font-size:12px;
+    text-decoration:line-through;
+}
+.item-controls {
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:13px;
+}
+.quantity {
+    height:39px;
+    display:flex;
+    align-items:center;
+    border:1px solid var(--line);
+    border-radius:25px;
+    overflow:hidden;
+    background:var(--card);
+}
+.quantity button {
+    width:34px;
+    height:100%;
+    border:0;
+    background:var(--soft);
+    color:var(--text);
+    font-size:18px;
+}
+.quantity span {
+    min-width:32px;
+    text-align:center;
+    font-size:13px;
+    font-weight:bold;
+}
+.remove-btn {
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:5px;
+    border:0;
+    background:transparent;
+    color:#c34a3c;
+    font-size:12px;
+}
+.remove-btn svg {
+    width:16px;
+    height:16px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+.item-total {
+    margin-top:2px;
+    color:var(--text);
+    font-size:13px;
+    font-weight:bold;
+}
+
+/* SUMMARY */
+.summary {
+    position:sticky;
+    top:20px;
+    padding:23px;
+    border:1px solid var(--line);
+    border-radius:18px;
+    background:var(--card);
+    box-shadow:var(--shadow);
+}
+.summary h2 {
+    margin:0 0 20px;
+    font-size:20px;
+}
+.summary-row {
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    margin:15px 0;
+    color:var(--muted);
+    font-size:13px;
+}
+.summary-row strong {color:var(--text)}
+.summary-divider {
+    height:1px;
+    margin:18px 0;
+    background:var(--line);
+}
+.summary-total {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    font-size:15px;
+    font-weight:bold;
+}
+.summary-total strong {
+    color:var(--main);
+    font-size:23px;
+}
+.checkout-btn {
+    width:100%;
+    min-height:49px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    margin-top:22px;
+    border:0;
+    border-radius:30px;
+    background:linear-gradient(100deg,#642307,var(--main));
+    color:white;
+    font-weight:bold;
+    transition:.2s;
+}
+.checkout-btn:hover {
+    transform:translateY(-2px);
+    opacity:.93;
+}
+body.dark .checkout-btn {
+    background:linear-gradient(100deg,#f5d18c,#c98532);
+    color:#241307;
+}
+.checkout-btn svg {
+    width:19px;
+    height:19px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+.continue-shopping {
+    display:block;
+    margin-top:17px;
+    color:var(--main);
+    text-align:center;
+    font-size:13px;
+    font-weight:bold;
+}
+
+/* EMPTY CART */
+.empty-cart {
+    display:none;
+    padding:65px 20px;
+    border:1px dashed var(--line);
+    border-radius:20px;
+    background:var(--card);
+    text-align:center;
+}
+.empty-icon {
+    width:75px;
+    height:75px;
+    display:grid;
+    place-items:center;
+    margin:0 auto 18px;
+    border-radius:50%;
+    background:var(--soft);
+    color:var(--main);
+}
+.empty-icon svg {
+    width:38px;
+    height:38px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+.empty-cart h2 {
+    margin:0 0 10px;
+    font-size:23px;
+}
+.empty-cart p {
+    margin:0;
+    color:var(--muted);
+    font-size:14px;
+}
+.shop-btn {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:22px;
+    padding:13px 28px;
+    border-radius:30px;
+    background:var(--main);
+    color:white;
+    font-size:13px;
+    font-weight:bold;
+}
+body.dark .shop-btn {
+    color:#241307;
+    background:var(--gold);
+}
+
+/* FOOTER */
+.site-footer {
+    margin-top:30px;
+    padding-top:28px;
+    background:#251912;
+    color:#f5eadd;
+}
+.footer-content {
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1.2fr 1fr;
+    gap:22px;
+    padding-bottom:22px;
+}
+.footer-brand {text-align:center}
+.footer-brand img {
+    width:75px;
+    height:75px;
+    padding:4px;
+    border-radius:50%;
+    background:#fff;
+    object-fit:contain;
+}
+.footer-brand h3,.site-footer h3 {color:#d6ad70}
+.footer-brand p,.footer-contact p,.footer-branches p {
+    color:#d4c4b4;
+    font-size:12px;
+    line-height:1.8;
+}
+.footer-links,.footer-contact,.footer-branches {
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+}
+.footer-links a,.footer-contact a {
+    margin-bottom:9px;
+    color:#e5d7c8;
+    font-size:12px;
+}
+.footer-links a:hover,.footer-contact a:hover {color:#d6ad70}
+.footer-contact a {
+    direction:ltr;
+    unicode-bidi:plaintext;
+}
+.footer-contact p,.footer-branches p {
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+}
+.footer-contact svg {
+    width:20px;
+    height:20px;
+    min-width:20px;
+    fill:none;
+    stroke:#d6ad70;
+    stroke-width:1.7;
+}
+.footer-whatsapp {
+    padding:8px 14px;
+    border-radius:25px;
+    background:#c49a55;
+    color:#251912!important;
+    font-weight:bold;
+}
+.footer-bottom {
+    padding:13px;
+    border-top:1px solid #d6ad7033;
+    color:#bca995;
+    font-size:11px;
+    text-align:center;
+}
+.toast {
+    position:fixed;
+    bottom:25px;
+    right:50%;
+    z-index:100;
+    padding:14px 24px;
+    border:1px solid var(--gold);
+    border-radius:30px;
+    background:var(--card);
+    color:var(--text);
+    box-shadow:var(--shadow);
+    opacity:0;
+    visibility:hidden;
+    transform:translate(50%,15px);
+    transition:.25s;
+}
+.toast.show {
+    opacity:1;
+    visibility:visible;
+    transform:translate(50%,0);
+}
+
+/* MOBILE */
+@media(max-width:650px) {
+    .headin {min-height:68px}
+    .brandname {font-size:18px}
+    .brand small {font-size:8px}
+    .brand-logo-frame {width:80px;height:80px;min-width:80px}
+    .navigation-wrap {padding:0 10px 10px}
+    .main-nav {
+        width:100%;
+        justify-content:flex-start;
+        overflow-x:auto;
+        scrollbar-width:none;
+    }
+    .main-nav::-webkit-scrollbar {display:none}
+    .main-nav a {padding:9px 13px;font-size:12px}
+    .header-bottom-inner {min-height:45px}
+    .tool {width:35px;height:35px}
+    main {padding-top:20px}
+    .cart-layout {grid-template-columns:1fr}
+    .summary {position:static}
+    .cart-item {
+        grid-template-columns:90px minmax(0,1fr);
+        gap:12px;
+        padding:13px;
+    }
+    .item-image {width:90px;height:100px}
+    .item-details h3 {font-size:15px}
+    .item-controls {
+        grid-column:1/-1;
+        flex-direction:row;
+        align-items:center;
+        justify-content:space-between;
+    }
+    .footer-content {
+        grid-template-columns:1fr;
+        gap:8px;
+        text-align:center;
+    }
+    .footer-links,.footer-contact,.footer-branches {
+        align-items:center;
+    }
+    .footer-contact p,.footer-branches p {
+        justify-content:center;
+    }
+}
+.footer-contact p {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.3;
+}
+
+.footer-contact {
+    gap: 4px !important;
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="main-header">
+    <div class="wrap headin">
+        <a class="brand" href="index.html">
+            <span class="brand-info">
+                <span class="brandname">المزن للعطور</span>
+                <small>ALMUZN FOR PERFUME</small>
+            </span>
+            <span class="brand-logo-frame">
+                <img src="imges/logo.png" class="brand-logo" alt="المزن للعطور">
+            </span>
+        </a>
+    </div>
+
+    <div class="navigation-wrap">
+        <nav class="main-nav">
+            <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+            <a href="products.html" data-ar="جميع العطور" data-en="All Perfumes">جميع العطور</a>
+            <a href="products.html?category=men" data-ar="رجالي" data-en="Men">رجالي</a>
+            <a href="products.html?category=women" data-ar="نسائي" data-en="Women">نسائي</a>
+            <a href="products.html?category=offers" data-ar="العروض" data-en="Offers">العروض</a>
+        </nav>
+    </div>
+
+    <div class="header-bottom">
+        <div class="wrap header-bottom-inner">
+            <div class="header-actions">
+                <a class="tool" href="products.html" aria-label="المنتجات">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="10.8" cy="10.8" r="6.8"/>
+                        <path d="m16 16 5 5"/>
+                    </svg>
+                </a>
+                <a class="tool" href="cart.html" aria-label="السلة">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 4h2l2.5 11h11L21 8H6"/>
+                        <circle cx="9" cy="19" r="1.5"/>
+                        <circle cx="17" cy="19" r="1.5"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="header-settings">
+                <button class="tool" id="langBtn" type="button" aria-label="تغيير اللغة">
+                    <svg class="language-icon" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="9.5"/>
+                        <path d="M2.8 12h18.4"/>
+                        <path d="M12 2.5c2.5 2.6 3.8 5.8 3.8 9.5s-1.3 6.9-3.8 9.5"/>
+                        <path d="M12 2.5C9.5 5.1 8.2 8.3 8.2 12s1.3 6.9 3.8 9.5"/>
+                    </svg>
+                    <span id="langLabel">EN</span>
+                </button>
+                <button class="tool" id="themeBtn" type="button" aria-label="تغيير الوضع">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="wrap">
+
+    <div class="breadcrumb">
+        <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+        <span> / </span>
+        <span data-ar="سلة التسوق" data-en="Shopping Cart">سلة التسوق</span>
+    </div>
+
+    <h1 class="page-title" data-ar="سلة التسوق" data-en="Shopping Cart">سلة التسوق</h1>
+    <p class="page-subtitle"
+       data-ar="راجع اختياراتك قبل إتمام الطلب."
+       data-en="Review your selections before completing your order.">
+        راجع اختياراتك قبل إتمام الطلب.
+    </p>
+
+    <section class="cart-layout" id="cartLayout">
+
+        <div class="cart-items" id="cartItems"></div>
+
+        <aside class="summary">
+            <h2 data-ar="ملخص الطلب" data-en="Order Summary">ملخص الطلب</h2>
+
+            <div class="summary-row">
+                <span data-ar="عدد المنتجات" data-en="Items">عدد المنتجات</span>
+                <strong id="itemCount">0</strong>
+            </div>
+
+            <div class="summary-row">
+                <span data-ar="المجموع الفرعي" data-en="Subtotal">المجموع الفرعي</span>
+                <strong id="subtotal">0</strong>
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-total">
+                <span data-ar="الإجمالي" data-en="Total">الإجمالي</span>
+                <strong id="total">0</strong>
+            </div>
+
+            <button class="checkout-btn" id="checkoutBtn" type="button">
+                <span data-ar="متابعة لإتمام الطلب" data-en="Proceed to Checkout">
+                    متابعة لإتمام الطلب
+                </span>
+                <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"/>
+                    <path d="m13 6 6 6-6 6"/>
+                </svg>
+            </button>
+
+            <a class="continue-shopping" href="products.html"
+               data-ar="متابعة التسوق" data-en="Continue Shopping">
+                متابعة التسوق
+            </a>
+        </aside>
+
+    </section>
+
+    <section class="empty-cart" id="emptyCart">
+        <div class="empty-icon">
+            <svg viewBox="0 0 24 24">
+                <path d="M3 4h2l2.5 11h11L21 8H6"/>
+                <circle cx="9" cy="19" r="1.5"/>
+                <circle cx="17" cy="19" r="1.5"/>
+            </svg>
+        </div>
+        <h2 data-ar="سلتك فارغة حالياً" data-en="Your cart is empty">
+            سلتك فارغة حالياً
+        </h2>
+        <p data-ar="اكتشف مجموعتنا المختارة من العطور وأضف ما يناسبك."
+           data-en="Explore our perfume collection and add your favorites.">
+            اكتشف مجموعتنا المختارة من العطور وأضف ما يناسبك.
+        </p>
+        <a class="shop-btn" href="products.html"
+           data-ar="تصفح العطور" data-en="Browse Perfumes">
+            تصفح العطور
+        </a>
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="wrap footer-content">
+
+        <div class="footer-brand">
+            <img src="imges/logo.png" alt="شعار المزن للعطور">
+            <h3>المزن للعطور</h3>
+            <span>ALMUZN FOR PERFUME</span>
+            <p data-ar="عطور مختارة بعناية لتمنحك حضوراً مميزاً وأناقة تدوم."
+               data-en="Carefully selected fragrances for a distinctive presence and lasting elegance.">
+                عطور مختارة بعناية لتمنحك حضوراً مميزاً وأناقة تدوم.
+            </p>
+        </div>
+
+        <div class="footer-links">
+            <h3 data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
+            <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+            <a href="products.html" data-ar="جميع العطور" data-en="All Perfumes">جميع العطور</a>
+            <a href="cart.html" data-ar="سلة التسوق" data-en="Shopping Cart">سلة التسوق</a>
+        </div>
+
+        <div class="footer-contact">
+            <h3 data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h3>
+            <p>
+                <svg viewBox="0 0 24 24">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+                <a href="tel:+249129109531">+249 12 910 9531</a>
+            </p>
+            <p>
+                <svg viewBox="0 0 24 24">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                    <path d="m22 7-10 7L2 7"/>
+                </svg>
+                <a href="mailto:Almuznperfume@gmail.com">Almuznperfume@gmail.com</a>
+            </p>
+            <a class="footer-whatsapp" href="https://wa.me/249129109531"
+               target="_blank" rel="noopener noreferrer">
+                <span data-ar="تواصل عبر واتساب" data-en="Contact via WhatsApp">
+                    تواصل عبر واتساب
+                </span>
+            </a>
+        </div>
+
+        <div class="footer-branches">
+            <h3 data-ar="فروعنا" data-en="Our Branches">فروعنا</h3>
+            <p data-ar="أم درمان - شارع الوادي - شمال استوب الأبراج - مقابل منى ميكس"
+               data-en="Omdurman - Al Wadi Street - North of Al Abrag Stop - Opposite Mona Mix">
+                أم درمان - شارع الوادي - شمال استوب الأبراج - مقابل منى ميكس
+            </p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 المزن للعطور – جميع الحقوق محفوظة
+    </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = selector => document.querySelector(selector);
+
+/* اللغة والثيم */
+let lang = localStorage.getItem('almuzn_lang') || 'ar';
+let theme = localStorage.getItem('almuzn_theme') || 'light';
+
+function setTheme() {
+    document.body.classList.toggle('dark', theme === 'dark');
+}
+
+function setLang() {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+    document.querySelectorAll('[data-ar][data-en]').forEach(element => {
+        element.textContent = element.dataset[lang];
+    });
+
+    $('#langLabel').textContent = lang === 'ar' ? 'EN' : 'عربي';
+    renderCart();
+}
+
+$('#themeBtn').addEventListener('click', () => {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('almuzn_theme', theme);
+    setTheme();
+});
+
+$('#langBtn').addEventListener('click', () => {
+    lang = lang === 'ar' ? 'en' : 'ar';
+    localStorage.setItem('almuzn_lang', lang);
+    setLang();
+});
+
+/* قراءة البيانات */
+function read(key, fallback) {
+    try {
+        return JSON.parse(localStorage.getItem(key)) ?? fallback;
+    } catch (error) {
+        return fallback;
+    }
+}
+
+let catalog = read('almuzn_products', []);
+let cart = read('almuzn_cart', []);
+
+if (!Array.isArray(catalog)) catalog = [];
+if (!Array.isArray(cart)) cart = [];
+
+/* حماية النصوص عند عرضها */
+function escapeHTML(value) {
+    return String(value ?? '').replace(/[&<>"']/g, char => ({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#39;'
+    })[char]);
+}
+
+/* الأسعار */
+function formatPrice(price) {
+    return Number(price || 0).toLocaleString(
+        lang === 'ar' ? 'ar' : 'en'
+    ) + (lang === 'ar' ? ' ج.س' : ' SDG');
+}
+
+/* أسماء الأقسام */
+function categoryName(category) {
+    const categories = {
+        men:['رجالي','Men'],
+        women:['نسائي','Women'],
+        eastern:['شرقي','Oriental'],
+        luxury:['فاخر','Luxury'],
+        incense:['مستحضرات معطرة','Scented Products'],
+        special:['مميز','Special'],
+        offers:['العروض','Offers']
+    };
+
+    return categories[category]?.[lang === 'ar' ? 0 : 1]
+        || (lang === 'ar' ? 'عطور' : 'Perfumes');
+}
+
+/* حفظ السلة */
+function saveCart() {
+    localStorage.setItem('almuzn_cart', JSON.stringify(cart));
+}
+
+/* الحصول على المنتج */
+function getProduct(id) {
+    return catalog.find(product =>
+        String(product.id) === String(id)
+    );
+}
+
+/* تحديث السلة وعرض المنتجات */
+function renderCart() {
+    const container = $('#cartItems');
+    let validItems = [];
+    let totalQuantity = 0;
+    let subtotal = 0;
+
+    cart.forEach(item => {
+        const product = getProduct(item.id);
+        const qty = Math.max(1, Number(item.qty) || 1);
+
+        if (!product) return;
+
+        const stock = Number(product.stock ?? 0);
+
+        if (stock <= 0) return;
+
+        const safeQty = Math.min(qty, stock);
+
+        validItems.push({
+            id:product.id,
+            qty:safeQty
+        });
+
+        totalQuantity += safeQty;
+        subtotal += Number(product.price || 0) * safeQty;
+    });
+
+    cart = validItems;
+    saveCart();
+
+    if (cart.length === 0) {
+        $('#cartLayout').style.display = 'none';
+        $('#emptyCart').style.display = 'block';
+        return;
+    }
+
+    $('#cartLayout').style.display = 'grid';
+    $('#emptyCart').style.display = 'none';
+
+    container.innerHTML = cart.map(item => {
+        const product = getProduct(item.id);
+        const name = lang === 'ar'
+            ? (product.name || '')
+            : (product.en || product.name || '');
+
+        const image = escapeHTML(product.image || 'imges/logo.png');
+        const oldPrice = Number(product.old || 0);
+        const price = Number(product.price || 0);
+
+        return `
+            <article class="cart-item" data-id="${escapeHTML(item.id)}">
+
+                <a class="item-image"
+                   href="product-details.html?id=${encodeURIComponent(item.id)}">
+                    <img src="${image}" alt="${escapeHTML(name)}">
+                </a>
+
+                <div class="item-details">
+                    <h3>${escapeHTML(name)}</h3>
+                    <span class="item-category">
+                        ${escapeHTML(categoryName(product.category))}
+                    </span>
+                    <div>
+                        <span class="item-price">${formatPrice(price)}</span>
+                        ${oldPrice > price
+                            ? `<span class="item-old-price">${formatPrice(oldPrice)}</span>`
+                            : ''}
+                    </div>
+                </div>
+
+                <div class="item-controls">
+                    <div class="quantity">
+                        <button type="button" data-action="decrease"
+                                aria-label="تقليل الكمية">−</button>
+                        <span>${item.qty}</span>
+                        <button type="button" data-action="increase"
+                                aria-label="زيادة الكمية">+</button>
+                    </div>
+
+                    <div class="item-total">
+                        ${lang === 'ar' ? 'الإجمالي:' : 'Total:'}
+                        ${formatPrice(price * item.qty)}
+                    </div>
+
+                    <button type="button" class="remove-btn" data-action="remove">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 6h18"/>
+                            <path d="M8 6V4h8v2"/>
+                            <path d="m19 6-1 14H6L5 6"/>
+                            <path d="M10 11v5M14 11v5"/>
+                        </svg>
+                        <span data-ar="حذف" data-en="Remove">
+                            ${lang === 'ar' ? 'حذف' : 'Remove'}
+                        </span>
+                    </button>
+                </div>
+
+            </article>
+        `;
+    }).join('');
+
+    $('#itemCount').textContent = totalQuantity.toLocaleString(
+        lang === 'ar' ? 'ar' : 'en'
+    );
+
+    $('#subtotal').textContent = formatPrice(subtotal);
+    $('#total').textContent = formatPrice(subtotal);
+}
+
+/* أزرار الكمية والحذف */
+$('#cartItems').addEventListener('click', event => {
+    const button = event.target.closest('[data-action]');
+    if (!button) return;
+
+    const row = button.closest('.cart-item');
+    if (!row) return;
+
+    const id = row.dataset.id;
+    const item = cart.find(entry => String(entry.id) === String(id));
+    const product = getProduct(id);
+
+    if (!item || !product) return;
+
+    const action = button.dataset.action;
+    const stock = Number(product.stock ?? 0);
+
+    if (action === 'increase') {
+        if (item.qty < stock) {
+            item.qty++;
+        } else {
+            showToast(lang === 'ar'
+                ? 'وصلت إلى الحد المتاح من هذا العطر'
+                : 'You have reached the available stock limit');
+        }
+    }
+
+    if (action === 'decrease') {
+        if (item.qty > 1) {
+            item.qty--;
+        } else {
+            cart = cart.filter(entry => String(entry.id) !== String(id));
+        }
+    }
+
+    if (action === 'remove') {
+        cart = cart.filter(entry => String(entry.id) !== String(id));
+    }
+
+    saveCart();
+    renderCart();
+});
+
+/* الانتقال لإتمام الطلب */
+$('#checkoutBtn').addEventListener('click', () => {
+    if (!cart.length) return;
+    window.location.href = 'checkout.html';
+});
+
+/* رسائل التنبيه */
+let toastTimer;
+
+function showToast(message) {
+    const toast = $('#toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2500);
+}
+
+/* مزامنة البيانات من الصفحات الأخرى */
+window.addEventListener('storage', event => {
+    if (event.key === 'almuzn_cart' || event.key === null) {
+        cart = read('almuzn_cart', []);
+        renderCart();
+    }
+
+    if (event.key === 'almuzn_products' || event.key === null) {
+        catalog = read('almuzn_products', []);
+        renderCart();
+    }
+
+    if (event.key === 'almuzn_lang') {
+        lang = localStorage.getItem('almuzn_lang') || 'ar';
+        setLang();
+    }
+
+    if (event.key === 'almuzn_theme') {
+        theme = localStorage.getItem('almuzn_theme') || 'light';
+        setTheme();
+    }
+});
+
+/* تشغيل الصفحة */
+setTheme();
+setLang();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,565 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>تأكيد الطلب | المزن للعطور</title>
+
+<style>
+:root {
+    --bg:#fff8f1;
+    --card:#fffdfb;
+    --soft:#f7e8da;
+    --text:#49200f;
+    --muted:#967765;
+    --main:#a9683f;
+    --main-dark:#794526;
+    --border:#ead8c9;
+    --shadow:0 10px 35px rgba(73,32,15,.08);
+}
+
+body.dark {
+    --bg:#151311;
+    --card:#211d19;
+    --soft:#30271f;
+    --text:#f4e5d7;
+    --muted:#bba797;
+    --main:#c8955b;
+    --main-dark:#e0b77e;
+    --border:#44372c;
+    --shadow:0 10px 35px rgba(0,0,0,.2);
+}
+
+* {
+    box-sizing:border-box;
+}
+
+body {
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    transition:.3s;
+}
+
+a {
+    text-decoration:none;
+    color:inherit;
+}
+
+.header {
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+    padding:14px 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.brand {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:var(--main);
+    font-size:21px;
+    font-weight:bold;
+}
+
+.brand img {
+    width:55px;
+    height:55px;
+    object-fit:contain;
+    border-radius:50%;
+    background:#fff;
+}
+
+.header-actions {
+    display:flex;
+    gap:12px;
+}
+
+.tool {
+    border:1px solid var(--border);
+    background:var(--soft);
+    color:var(--text);
+    padding:10px 15px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.main {
+    min-height:650px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:50px 20px;
+}
+
+.success-card {
+    width:100%;
+    max-width:650px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:45px 40px;
+    text-align:center;
+    box-shadow:var(--shadow);
+}
+ 
+.success-icon {
+    width:110px;
+    height:110px;
+    margin:0 auto 28px;
+    border-radius:50%;
+    background:linear-gradient(145deg,#f5e4d1,#fffaf4);
+    border:1px solid #dfbd9e;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 8px 25px rgba(169,104,63,.13);
+    animation:successPop .7s cubic-bezier(.2,.8,.3,1) both;
+}
+
+.success-icon svg {
+    width:55px;
+    height:55px;
+    fill:none;
+    stroke:#a9683f;
+    stroke-width:2.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.success-icon svg path {
+    stroke-dasharray:30;
+    stroke-dashoffset:30;
+    animation:drawCheck .65s ease forwards .55s;
+}
+
+@keyframes successPop {
+    0% {
+        opacity:0;
+        transform:scale(.4);
+    }
+    70% {
+        opacity:1;
+        transform:scale(1.12);
+    }
+    100% {
+        transform:scale(1);
+    }
+}
+
+@keyframes drawCheck {
+    to {
+        stroke-dashoffset:0;
+    }
+}
+
+body.dark .success-icon {
+    background:linear-gradient(145deg,#3a2a1e,#241c16);
+    border-color:#8c6746;
+}
+
+body.dark .success-icon svg {
+    stroke:#d8aa72;
+}
+
+@media(prefers-reduced-motion:reduce) {
+    .success-icon,
+    .success-icon svg path {
+        animation:none;
+        stroke-dashoffset:0;
+    }
+}
+
+.success-card h1 {
+    color:var(--main);
+    font-size:29px;
+    margin:0 0 15px;
+}
+
+.description {
+    color:var(--muted);
+    line-height:2;
+    font-size:15px;
+    margin:0 auto 28px;
+    max-width:470px;
+}
+
+.order-info {
+    background:var(--soft);
+    border:1px solid var(--border);
+    border-radius:13px;
+    padding:18px;
+    margin:25px 0;
+    text-align:right;
+}
+
+.order-info h3 {
+    font-size:16px;
+    margin:0 0 12px;
+}
+
+.info-row {
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    padding:9px 0;
+    border-bottom:1px solid var(--border);
+    font-size:14px;
+}
+
+.info-row:last-child {
+    border-bottom:0;
+}
+
+.info-row span:first-child {
+    color:var(--muted);
+}
+
+.info-row strong {
+    color:var(--text);
+}
+
+.status {
+    display:inline-block;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:30px;
+    padding:8px 17px;
+    color:var(--main);
+    font-size:13px;
+    margin-top:8px;
+}
+
+.buttons {
+    display:flex;
+    gap:13px;
+    margin-top:30px;
+}
+
+.btn {
+    flex:1;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+    font-size:14px;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.btn-primary {
+    background:var(--main);
+    color:#fff;
+}
+
+.btn-primary:hover {
+    background:var(--main-dark);
+}
+
+.btn-secondary {
+    border:1px solid var(--border);
+    color:var(--main);
+    background:var(--card);
+}
+
+.contact-note {
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.9;
+    margin-top:25px;
+}
+
+.footer {
+    background:var(--card);
+    border-top:1px solid var(--border);
+    padding:25px;
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+}
+
+@media(max-width:800px) {
+    .success-card {
+        padding:30px 20px;
+    }
+
+    .buttons {
+        flex-direction:column;
+    }
+}
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 30px;
+}
+
+.buttons .btn {
+    min-width: 210px;
+    padding: 14px 22px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+    .buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .buttons .btn {
+        width: 100%;
+        max-width: 320px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <a href="index.html" class="brand">
+        <img src="imges/logo.png" alt="ALMUZN">
+        <span>المزن للعطور</span>
+    </a>
+
+    <div class="header-actions">
+        <button class="tool" id="langBtn" type="button">EN</button>
+        <button class="tool" id="themeBtn" type="button"
+                aria-label="تغيير الوضع">◐</button>
+    </div>
+
+</header>
+
+<main class="main">
+
+    <section class="success-card">
+
+        <div class="success-icon">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 6L9 17l-5-5"/>
+            </svg>
+        </div>
+
+        <h1 data-ar="شكراً لطلبك!" data-en="Thank You for Your Order!">
+            شكراً لطلبك!
+        </h1>
+
+        <p class="description"
+           data-ar="تم استلام طلبك بنجاح. يسعدنا اختيارك للمزن للعطور، وسيتم التواصل معك لتأكيد تفاصيل الطلب والتوصيل."
+           data-en="Your order has been received successfully. Thank you for choosing ALMUZN FOR PERFUME. We will contact you to confirm your order and delivery details.">
+            تم استلام طلبك بنجاح. يسعدنا اختيارك للمزن للعطور، وسيتم التواصل معك لتأكيد تفاصيل الطلب والتوصيل.
+        </p>
+
+        <div class="order-info">
+
+            <h3 data-ar="تفاصيل الطلب" data-en="Order Details">
+                تفاصيل الطلب
+            </h3>
+
+            <div class="info-row">
+                <span data-ar="رقم الطلب" data-en="Order Number">
+                    رقم الطلب
+                </span>
+                <strong id="orderNumber">—</strong>
+            </div>
+
+            <div class="info-row">
+                <span data-ar="حالة الطلب" data-en="Order Status">
+                    حالة الطلب
+                </span>
+                <strong data-ar="قيد المراجعة" data-en="Under Review">
+                    قيد المراجعة
+                </strong>
+            </div>
+
+            <div class="info-row">
+                <span data-ar="حالة الدفع" data-en="Payment Status">
+                    حالة الدفع
+                </span>
+                <strong data-ar="بانتظار التأكيد" data-en="Awaiting Confirmation">
+                    بانتظار التأكيد
+                </strong>
+            </div>
+
+        </div>
+
+        <span class="status"
+              data-ar="سيتم التواصل معك قريباً"
+              data-en="We will contact you soon">
+            سيتم التواصل معك قريباً
+        </span>
+
+        <div class="buttons">
+<div class="buttons">
+
+    <a href="#" class="btn btn-primary"
+       id="whatsappOrderBtn"
+       style="background:#16845b"
+       data-ar="إرسال تفاصيل الطلب عبر واتساب"
+       data-en="Send Order Details via WhatsApp">
+       إرسال تفاصيل الطلب عبر واتساب
+    </a>
+
+    <a href="index.html" class="btn btn-primary"
+       data-ar="العودة إلى الرئيسية"
+       data-en="Back to Home">
+        العودة إلى الرئيسية
+    </a>
+
+    <a href="products.html" class="btn btn-secondary"
+       data-ar="مواصلة التسوق"
+       data-en="Continue Shopping">
+        مواصلة التسوق
+    </a>
+
+</div>
+          
+
+           
+
+        </div>
+
+        <p class="contact-note"
+           data-ar="نشكرك على ثقتك بنا. المزن للعطور، حيث تلتقي الفخامة بالأناقة."
+           data-en="Thank you for trusting us. ALMUZN FOR PERFUME, where luxury meets elegance.">
+            نشكرك على ثقتك بنا. المزن للعطور، حيث تلتقي الفخامة بالأناقة.
+        </p>
+
+    </section>
+
+</main>
+
+<footer class="footer">
+    <p data-ar="© المزن للعطور – جميع الحقوق محفوظة"
+       data-en="© ALMUZN FOR PERFUME – All Rights Reserved">
+        © المزن للعطور – جميع الحقوق محفوظة
+    </p>
+</footer>
+
+<script>
+let lang = localStorage.getItem('almuzn_lang') || 'ar';
+let theme = localStorage.getItem('almuzn_theme') || 'light';
+
+function setTheme() {
+    document.body.classList.toggle('dark', theme === 'dark');
+    localStorage.setItem('almuzn_theme', theme);
+}
+
+function setLanguage() {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+    document.querySelectorAll('[data-ar]').forEach(el => {
+        el.textContent = el.dataset[lang];
+    });
+
+    document.getElementById('langBtn').textContent =
+        lang === 'ar' ? 'EN' : 'AR';
+}
+
+document.getElementById('themeBtn').addEventListener('click', () => {
+    theme = theme === 'light' ? 'dark' : 'light';
+    setTheme();
+});
+
+document.getElementById('langBtn').addEventListener('click', () => {
+    lang = lang === 'ar' ? 'en' : 'ar';
+    localStorage.setItem('almuzn_lang', lang);
+    setLanguage();
+});
+
+setTheme();
+setLanguage();
+/* إرسال تفاصيل الطلب إلى واتساب */
+
+document.getElementById('whatsappOrderBtn')
+.addEventListener('click', function(e) {
+
+    e.preventDefault();
+
+    let order;
+
+    try {
+        order = JSON.parse(
+            localStorage.getItem('almuzn_pending_order') || 'null'
+        );
+    } catch {
+        order = null;
+    }
+
+    if (!order) {
+        alert(lang === 'ar'
+            ? 'لا توجد تفاصيل طلب محفوظة. يرجى العودة إلى صفحة إتمام الطلب.'
+            : 'No order details found. Please return to checkout.');
+
+        return;
+    }
+
+    const isArabic = lang === 'ar';
+
+    const paymentName = order.payment === 'cod'
+        ? (isArabic ? 'الدفع عند الاستلام' : 'Cash on Delivery')
+        : order.bank === 'bankak'
+            ? (isArabic ? 'بنكك – بنك الخرطوم' : 'Bankak – Bank of Khartoum')
+            : (isArabic ? 'فوري – بنك فيصل الإسلامي' : 'Fawry – Faisal Islamic Bank');
+
+    let message = isArabic
+        ? 'السلام عليكم، أود تأكيد طلبي من متجر المزن للعطور.\n\n'
+        : 'Hello, I would like to confirm my order from ALMUZN FOR PERFUME.\n\n';
+
+    message += isArabic
+        ? `الاسم: ${order.name}\nرقم الهاتف: ${order.phone}\n`
+        : `Name: ${order.name}\nPhone: ${order.phone}\n`;
+
+    if (order.secondPhone) {
+        message += isArabic
+            ? `رقم إضافي: ${order.secondPhone}\n`
+            : `Additional phone: ${order.secondPhone}\n`;
+    }
+
+    message += isArabic
+        ? `المدينة: ${order.city}\nالعنوان: ${order.address}\n`
+        : `City: ${order.city}\nAddress: ${order.address}\n`;
+
+    message += isArabic ? '\nالمنتجات:\n' : '\nProducts:\n';
+
+    order.products.forEach(p => {
+        message += `- ${isArabic ? p.name : p.en} × ${p.qty} = ${Number(p.total).toLocaleString()} SDG\n`;
+    });
+
+    message += isArabic
+        ? `\nإجمالي المنتجات: ${Number(order.total).toLocaleString()} ج.س\nطريقة الدفع: ${paymentName}\n`
+        : `\nProducts Total: ${Number(order.total).toLocaleString()} SDG\nPayment: ${paymentName}\n`;
+
+    if (order.notes) {
+        message += isArabic
+            ? `ملاحظات: ${order.notes}\n`
+            : `Notes: ${order.notes}\n`;
+    }
+
+    if (order.receiptName) {
+        message += isArabic
+            ? `اسم ملف الإيصال: ${order.receiptName}\n`
+            : `Receipt filename: ${order.receiptName}\n`;
+    }
+
+    const whatsappURL =
+        'https://wa.me/249129109531?text=' +
+        encodeURIComponent(message);
+
+    window.open(whatsappURL, '_blank');
+});
+</script>
+
+</body>
+</html>

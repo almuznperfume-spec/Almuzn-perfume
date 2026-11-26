@@ -1,0 +1,935 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>إتمام الطلب | المزن للعطور</title>
+
+<style>
+:root {
+    --bg:#fff8f1;
+    --card:#fffdfb;
+    --soft:#f7e8da;
+    --text:#49200f;
+    --muted:#967765;
+    --main:#a9683f;
+    --main-dark:#794526;
+    --border:#ead8c9;
+    --shadow:0 8px 30px rgba(73,32,15,.07);
+}
+
+body.dark {
+    --bg:#151311;
+    --card:#211d19;
+    --soft:#30271f;
+    --text:#f4e5d7;
+    --muted:#bba797;
+    --main:#c8955b;
+    --main-dark:#e0b77e;
+    --border:#44372c;
+    --shadow:0 8px 30px rgba(0,0,0,.2);
+}
+
+* {
+    box-sizing:border-box;
+}
+
+body {
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    transition:.3s;
+}
+
+button,input,select,textarea {
+    font:inherit;
+}
+
+a {
+    color:inherit;
+    text-decoration:none;
+}
+
+.header {
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+    padding:14px 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.brand {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:21px;
+    font-weight:bold;
+    color:var(--main);
+}
+
+.brand img {
+    width:55px;
+    height:55px;
+    object-fit:contain;
+    border-radius:50%;
+    background:#fff;
+}
+
+.header-actions {
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.tool {
+    border:1px solid var(--border);
+    background:var(--soft);
+    color:var(--text);
+    padding:10px 15px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.page {
+    max-width:1120px;
+    margin:35px auto 60px;
+    padding:0 20px;
+}
+
+.page-title {
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.page-title h1 {
+    font-size:30px;
+    margin:0 0 10px;
+    color:var(--main);
+}
+
+.page-title p {
+    color:var(--muted);
+    margin:0;
+}
+
+.checkout-grid {
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:25px;
+    align-items:start;
+}
+
+.panel {
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:25px;
+    box-shadow:var(--shadow);
+}
+
+.panel h2 {
+    font-size:20px;
+    margin:0 0 22px;
+    padding-bottom:15px;
+    border-bottom:1px solid var(--border);
+}
+
+.form-group {
+    margin-bottom:18px;
+}
+
+.form-group label {
+    display:block;
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:9px;
+}
+
+.required {
+    color:#c94b3c;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width:100%;
+    padding:14px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:var(--bg);
+    color:var(--text);
+    outline:none;
+    transition:.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color:var(--main);
+    box-shadow:0 0 0 3px rgba(169,104,63,.10);
+}
+
+.form-group textarea {
+    min-height:90px;
+    resize:vertical;
+}
+
+.form-row {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.optional {
+    color:var(--muted);
+    font-size:12px;
+    font-weight:normal;
+}
+
+.payment-options {
+    display:grid;
+    gap:12px;
+}
+
+.payment-option {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:15px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.payment-option:has(input:checked) {
+    border-color:var(--main);
+    background:var(--soft);
+}
+
+.payment-option input {
+    accent-color:var(--main);
+    width:17px;
+    height:17px;
+}
+
+.payment-option strong {
+    display:block;
+    margin-bottom:4px;
+}
+
+.payment-option small {
+    color:var(--muted);
+}
+
+.payment-details {
+    display:none;
+    margin-top:15px;
+    padding:18px;
+    background:var(--soft);
+    border:1px solid var(--border);
+    border-radius:12px;
+}
+
+.payment-details.show {
+    display:block;
+}
+
+.payment-details h3 {
+    margin:0 0 14px;
+    font-size:16px;
+}
+
+.bank-option {
+    padding:13px;
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:10px;
+    margin-bottom:10px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+}
+
+.bank-option input {
+    accent-color:var(--main);
+}
+
+.account-box {
+    margin-top:12px;
+    padding:14px;
+    border:1px dashed var(--main);
+    border-radius:10px;
+    background:var(--card);
+}
+
+.account-box p {
+    margin:7px 0;
+    color:var(--muted);
+    font-size:13px;
+}
+
+.account-number {
+    min-height:20px;
+    color:var(--main);
+    font-weight:bold;
+    direction:ltr;
+    text-align:right;
+}
+
+.receipt-upload {
+    margin-top:15px;
+}
+
+.receipt-upload input {
+    width:100%;
+    padding:10px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:9px;
+    color:var(--text);
+}
+
+.summary-item {
+    display:flex;
+    align-items:center;
+    gap:13px;
+    padding:13px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.summary-item img {
+    width:70px;
+    height:75px;
+    object-fit:cover;
+    border-radius:10px;
+    background:var(--soft);
+}
+
+.item-info {
+    flex:1;
+}
+
+.item-info h4 {
+    margin:0 0 7px;
+    font-size:14px;
+}
+
+.item-info p {
+    margin:0;
+    font-size:12px;
+    color:var(--muted);
+}
+
+.item-price {
+    font-weight:bold;
+    color:var(--main);
+    white-space:nowrap;
+    font-size:13px;
+}
+
+.summary-total {
+    margin-top:20px;
+}
+
+.total-row {
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin:14px 0;
+    color:var(--muted);
+    font-size:14px;
+}
+
+.total-row.final {
+    border-top:1px solid var(--border);
+    padding-top:17px;
+    margin-top:18px;
+    color:var(--text);
+    font-size:19px;
+    font-weight:bold;
+}
+
+.total-row.final strong {
+    color:var(--main);
+}
+
+.delivery-note {
+    background:var(--soft);
+    border-radius:10px;
+    padding:12px;
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.8;
+    margin-top:15px;
+}
+
+.submit-btn {
+    width:100%;
+    border:0;
+    background:var(--main);
+    color:white;
+    padding:16px;
+    border-radius:11px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:20px;
+    transition:.2s;
+}
+
+.submit-btn:hover {
+    background:var(--main-dark);
+}
+
+.back-link {
+    display:block;
+    text-align:center;
+    margin-top:17px;
+    color:var(--main);
+    font-size:14px;
+}
+
+.empty-cart {
+    text-align:center;
+    padding:35px 15px;
+    color:var(--muted);
+}
+
+.empty-cart a {
+    display:inline-block;
+    margin-top:15px;
+    background:var(--main);
+    color:white;
+    padding:12px 22px;
+    border-radius:9px;
+}
+
+.notice {
+    display:none;
+    padding:13px;
+    margin-top:15px;
+    border-radius:10px;
+    background:var(--soft);
+    color:var(--text);
+    line-height:1.8;
+    font-size:13px;
+}
+
+.notice.show {
+    display:block;
+}
+
+.footer {
+    background:var(--card);
+    border-top:1px solid var(--border);
+    padding:30px 6%;
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+}
+
+@media(max-width:800px) {
+    .checkout-grid {
+        grid-template-columns:1fr;
+    }
+
+    .form-row {
+        grid-template-columns:1fr;
+        gap:0;
+    }
+
+    .page {
+        padding:0 14px;
+    }
+
+    .panel {
+        padding:19px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <a href="index.html" class="brand">
+        <img src="imges/logo.png" alt="ALMUZN">
+        <span>المزن للعطور</span>
+    </a>
+
+    <div class="header-actions">
+        <a href="cart.html" class="tool" data-ar="السلة" data-en="Cart">السلة</a>
+        <button class="tool" id="langBtn" type="button">EN</button>
+        <button class="tool" id="themeBtn" type="button" aria-label="تغيير الوضع">◐</button>
+    </div>
+</header>
+
+<main class="page">
+
+    <div class="page-title">
+        <h1 data-ar="إتمام الطلب" data-en="Checkout">إتمام الطلب</h1>
+        <p data-ar="أدخل بياناتك لإكمال طلبك من المزن للعطور"
+           data-en="Enter your details to complete your order">
+           أدخل بياناتك لإكمال طلبك من المزن للعطور
+        </p>
+    </div>
+
+    <div class="checkout-grid">
+
+        <section class="panel">
+            <h2 data-ar="بيانات التوصيل" data-en="Delivery Information">
+                بيانات التوصيل
+            </h2>
+
+            <form id="checkoutForm">
+
+                <div class="form-group">
+                    <label>
+                        <span data-ar="الاسم الكامل" data-en="Full Name">الاسم الكامل</span>
+                        <span class="required">*</span>
+                    </label>
+                    <input type="text" id="customerName" required
+                           autocomplete="name"
+                           data-ar-placeholder="أدخل اسمك الكامل"
+                           data-en-placeholder="Enter your full name"
+                           placeholder="أدخل اسمك الكامل">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>
+                            <span data-ar="رقم الهاتف" data-en="Phone Number">رقم الهاتف</span>
+                            <span class="required">*</span>
+                        </label>
+                        <input type="tel" id="phone" required
+                               autocomplete="tel"
+                               data-ar-placeholder="أدخل رقم هاتفك"
+                               data-en-placeholder="Enter your phone number"
+                               placeholder="أدخل رقم هاتفك">
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <span data-ar="رقم هاتف إضافي" data-en="Additional Phone">رقم هاتف إضافي</span>
+                            <span class="optional" data-ar="اختياري" data-en="Optional">اختياري</span>
+                        </label>
+                        <input type="tel" id="secondPhone"
+                               data-ar-placeholder="رقم إضافي إن وجد"
+                               data-en-placeholder="Optional phone number"
+                               placeholder="رقم إضافي إن وجد">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <span data-ar="الولاية أو المدينة" data-en="City">الولاية أو المدينة</span>
+                        <span class="required">*</span>
+                    </label>
+
+                    <select id="city" required>
+                        <option value="" data-ar="اختر المدينة" data-en="Select city">اختر المدينة</option>
+                        <option value="الخرطوم" data-ar="الخرطوم" data-en="Khartoum">الخرطوم</option>
+                        <option value="أم درمان" data-ar="أم درمان" data-en="Omdurman">أم درمان</option>
+                        <option value="بحري" data-ar="بحري" data-en="Bahri">بحري</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <span data-ar="العنوان بالتفصيل" data-en="Detailed Address">العنوان بالتفصيل</span>
+                        <span class="required">*</span>
+                    </label>
+                    <textarea id="address" required
+                              data-ar-placeholder="الحي، الشارع، أقرب معلم..."
+                              data-en-placeholder="Neighborhood, street, nearest landmark..."
+                              placeholder="الحي، الشارع، أقرب معلم..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <span data-ar="ملاحظات إضافية" data-en="Additional Notes">ملاحظات إضافية</span>
+                        <span class="optional" data-ar="اختياري" data-en="Optional">اختياري</span>
+                    </label>
+                    <textarea id="notes"
+                              data-ar-placeholder="أي تفاصيل أخرى ترغب في إضافتها..."
+                              data-en-placeholder="Any other details..."
+                              placeholder="أي تفاصيل أخرى ترغب في إضافتها..."></textarea>
+                </div>
+
+                <h2 data-ar="طريقة الدفع" data-en="Payment Method">طريقة الدفع</h2>
+
+                <div class="payment-options">
+
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="cod" checked>
+                        <div>
+                            <strong data-ar="الدفع عند الاستلام" data-en="Cash on Delivery">
+                                الدفع عند الاستلام
+                            </strong>
+                            <small data-ar="ادفع عند استلام طلبك"
+                                   data-en="Pay when you receive your order">
+                                ادفع عند استلام طلبك
+                            </small>
+                        </div>
+                    </label>
+
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="bank">
+                        <div>
+                            <strong data-ar="التحويل البنكي" data-en="Bank Transfer">
+                                التحويل البنكي
+                            </strong>
+                            <small data-ar="بنكك أو فوري – بنك فيصل الإسلامي"
+                                   data-en="Bankak or Fawry – Faisal Islamic Bank">
+                                بنكك أو فوري – بنك فيصل الإسلامي
+                            </small>
+                        </div>
+                    </label>
+
+                </div>
+
+             
+<div class="payment-details" id="bankDetails">
+
+    <h3 data-ar="اختر وسيلة التحويل"
+        data-en="Choose Transfer Method">
+        اختر وسيلة التحويل
+    </h3>
+
+    <!-- بنكك -->
+    <label class="bank-option">
+        <input type="radio" name="bank" value="bankak">
+      <span data-ar="بنكك – بنك الخرطوم"
+      data-en="Bankak – Bank of Khartoum">
+    بنكك – بنك الخرطوم
+</span>
+    </label>
+
+    <div class="account-box">
+        <strong data-ar="بيانات حساب بنكك"
+                data-en="Bankak Account Details">
+            بيانات حساب بنكك
+        </strong>
+
+        <p data-ar="اسم صاحب الحساب:"
+           data-en="Account Holder Name:">اسم صاحب الحساب:</p>
+        <div class="account-number"></div>
+
+        <p data-ar="رقم الحساب:"
+           data-en="Account Number:">رقم الحساب:</p>
+        <div class="account-number"></div>
+    </div>
+
+    <!-- فوري -->
+    <label class="bank-option">
+        <input type="radio" name="bank" value="fawry">
+        <span data-ar="فوري – بنك فيصل الإسلامي"
+              data-en="Fawry – Faisal Islamic Bank">
+            فوري – بنك فيصل الإسلامي
+        </span>
+    </label>
+
+    <div class="account-box">
+        <strong data-ar="بيانات حساب فوري"
+                data-en="Fawry Account Details">
+            بيانات حساب فوري
+        </strong>
+
+        <p data-ar="اسم صاحب الحساب:"
+           data-en="Account Holder Name:">اسم صاحب الحساب:</p>
+        <div class="account-number"></div>
+
+        <p data-ar="رقم الحساب:"
+           data-en="Account Number:">رقم الحساب:</p>
+        <div class="account-number"></div>
+    </div>
+
+    <div class="receipt-upload">
+        <label class="form-group">
+            <span data-ar="إرفاق إيصال التحويل"
+                  data-en="Attach Transfer Receipt">
+                إرفاق إيصال التحويل
+            </span>
+            <span class="optional"
+                  data-ar="اختياري"
+                  data-en="Optional">اختياري</span>
+        </label>
+        <input type="file" id="receipt" accept="image/*,.pdf">
+    </div>
+
+</div>
+
+
+                <div class="notice" id="formNotice"></div>
+
+                <button class="submit-btn" type="submit"
+                        data-ar="تأكيد الطلب" data-en="Confirm Order">
+                    تأكيد الطلب
+                </button>
+
+                <a href="cart.html" class="back-link"
+                   data-ar="العودة إلى السلة"
+                   data-en="Back to Cart">
+                   العودة إلى السلة
+                </a>
+
+            </form>
+        </section>
+
+        <aside class="panel">
+            <h2 data-ar="ملخص طلبك" data-en="Order Summary">ملخص طلبك</h2>
+
+            <div id="orderItems"></div>
+
+            <div class="summary-total" id="summaryTotal">
+                <div class="total-row">
+                    <span data-ar="المجموع الفرعي" data-en="Subtotal">المجموع الفرعي</span>
+                    <strong id="subtotal">0</strong>
+                </div>
+
+                <div class="total-row">
+                    <span data-ar="التوصيل" data-en="Delivery">التوصيل</span>
+                    <strong data-ar="يحدد لاحقاً" data-en="To be confirmed">يحدد لاحقاً</strong>
+                </div>
+
+                <div class="total-row final">
+                    <span data-ar="إجمالي المنتجات" data-en="Products Total">إجمالي المنتجات</span>
+                    <strong id="finalTotal">0</strong>
+                </div>
+            </div>
+
+            <div class="delivery-note"
+                 data-ar="رسوم التوصيل يتم تحديدها وتأكيدها معك قبل إكمال الطلب."
+                 data-en="Delivery fees will be confirmed with you before the order is completed.">
+                رسوم التوصيل يتم تحديدها وتأكيدها معك قبل إكمال الطلب.
+            </div>
+        </aside>
+
+    </div>
+</main>
+
+<footer class="footer">
+    <p data-ar="© المزن للعطور – جميع الحقوق محفوظة"
+       data-en="© ALMUZN FOR PERFUME – All Rights Reserved">
+       © المزن للعطور – جميع الحقوق محفوظة
+    </p>
+</footer>
+
+<script>
+const $ = selector => document.querySelector(selector);
+
+let lang = localStorage.getItem('almuzn_lang') || 'ar';
+let theme = localStorage.getItem('almuzn_theme') || 'light';
+
+function setTheme() {
+    document.body.classList.toggle('dark', theme === 'dark');
+    localStorage.setItem('almuzn_theme', theme);
+}
+
+function setLanguage() {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+    document.querySelectorAll('[data-ar]').forEach(el => {
+        el.textContent = el.dataset[lang];
+    });
+
+    document.querySelectorAll('[data-ar-placeholder]').forEach(el => {
+        el.placeholder = el.dataset[lang + 'Placeholder'];
+    });
+
+    $('#langBtn').textContent = lang === 'ar' ? 'EN' : 'AR';
+
+    renderCart();
+}
+
+$('#themeBtn').addEventListener('click', () => {
+    theme = theme === 'light' ? 'dark' : 'light';
+    setTheme();
+});
+
+$('#langBtn').addEventListener('click', () => {
+    lang = lang === 'ar' ? 'en' : 'ar';
+    localStorage.setItem('almuzn_lang', lang);
+    setLanguage();
+});
+
+function readProducts() {
+    try {
+        return JSON.parse(localStorage.getItem('almuzn_products')) || [];
+    } catch {
+        return [];
+    }
+}
+
+function readCart() {
+    try {
+        return JSON.parse(localStorage.getItem('almuzn_cart')) || [];
+    } catch {
+        return [];
+    }
+}
+
+function money(value) {
+    return Number(value || 0).toLocaleString(
+        lang === 'ar' ? 'ar' : 'en'
+    ) + (lang === 'ar' ? ' ج.س' : ' SDG');
+}
+
+function escapeHTML(value) {
+    return String(value ?? '').replace(/[&<>"']/g, char => ({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#039;'
+    }[char]));
+}
+
+let cartProducts = [];
+let subtotalValue = 0;
+
+function renderCart() {
+    const products = readProducts();
+    const cart = readCart();
+
+    cartProducts = cart.map(item => {
+        const product = products.find(
+            p => String(p.id) === String(item.id)
+        );
+
+        if (!product) return null;
+
+        const qty = Math.max(1, Number(item.qty) || 1);
+
+        return {
+            ...product,
+            qty,
+            lineTotal: Number(product.price || 0) * qty
+        };
+    }).filter(Boolean);
+
+    const container = $('#orderItems');
+
+    if (!cartProducts.length) {
+        $('#summaryTotal').style.display = 'none';
+
+        container.innerHTML = `
+            <div class="empty-cart">
+                <p>${lang === 'ar' ? 'سلتك فارغة حالياً.' : 'Your cart is empty.'}</p>
+                <a href="products.html">
+                    ${lang === 'ar' ? 'تصفح المنتجات' : 'Browse Products'}
+                </a>
+            </div>
+        `;
+
+        $('#checkoutForm').querySelector('button[type="submit"]').disabled = true;
+        $('#checkoutForm').querySelector('button[type="submit"]').style.opacity = '.5';
+        return;
+    }
+
+    $('#summaryTotal').style.display = 'block';
+    $('#checkoutForm').querySelector('button[type="submit"]').disabled = false;
+    $('#checkoutForm').querySelector('button[type="submit"]').style.opacity = '1';
+
+    subtotalValue = 0;
+
+    container.innerHTML = cartProducts.map(product => {
+        subtotalValue += product.lineTotal;
+
+        const name = lang === 'ar'
+            ? product.name
+            : (product.en || product.name);
+
+        const image = escapeHTML(product.image || 'imges/logo.png');
+
+        return `
+            <div class="summary-item">
+                <img src="${image}" alt="${escapeHTML(name)}"
+                     onerror="this.src='imges/logo.png'">
+
+                <div class="item-info">
+                    <h4>${escapeHTML(name)}</h4>
+                    <p>${lang === 'ar' ? 'الكمية:' : 'Quantity:'} ${product.qty}</p>
+                </div>
+
+                <div class="item-price">${money(product.lineTotal)}</div>
+            </div>
+        `;
+    }).join('');
+
+    $('#subtotal').textContent = money(subtotalValue);
+    $('#finalTotal').textContent = money(subtotalValue);
+}
+
+$('input[name="payment"]').forEach;
+
+document.querySelectorAll('input[name="payment"]').forEach(input => {
+    input.addEventListener('change', () => {
+        const isBank = $('input[name="payment"]:checked').value === 'bank';
+        $('#bankDetails').classList.toggle('show', isBank);
+    });
+});
+
+function showNotice(message) {
+    const notice = $('#formNotice');
+    notice.textContent = message;
+    notice.classList.add('show');
+}
+
+$('#checkoutForm').addEventListener('submit', event => {
+    event.preventDefault();
+
+    if (!cartProducts.length) {
+        showNotice(
+            lang === 'ar'
+            ? 'السلة فارغة، أضف منتجات أولاً.'
+            : 'Your cart is empty. Add products first.'
+        );
+        return;
+    }
+
+    const name = $('#customerName').value.trim();
+    const phone = $('#phone').value.trim();
+    const city = $('#city').value;
+    const address = $('#address').value.trim();
+
+    if (!name || !phone || !city || !address) {
+        showNotice(
+            lang === 'ar'
+            ? 'يرجى تعبئة الحقول الإجبارية.'
+            : 'Please complete all required fields.'
+        );
+        return;
+    }
+
+    const payment = $('input[name="payment"]:checked').value;
+
+    if (payment === 'bank' && !$('input[name="bank"]:checked')) {
+        showNotice(
+            lang === 'ar'
+            ? 'يرجى اختيار بنكك أو فوري.'
+            : 'Please choose Bankak or Fawry.'
+        );
+        return;
+    }
+
+    showNotice(
+        lang === 'ar'
+        ? 'تم التحقق من بيانات الطلب. الواجهة جاهزة، لكن إرسال الطلب وحفظه في قاعدة البيانات يحتاج ربط Supabase.'
+        : 'Your information has been validated. The page is ready, but submitting and saving the order requires Supabase integration.'
+    );
+});
+
+setTheme();
+setLanguage();
+</script>
+
+</body>
+</html>

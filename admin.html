@@ -1,0 +1,2029 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>لوحة التحكم | المزن للعطور</title>
+
+<link rel="stylesheet"
+ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+    --bg:#f8f1e9;
+    --card:#fffdf9;
+    --soft:#f1e4d7;
+    --text:#492c1e;
+    --muted:#967b68;
+    --main:#a66d43;
+    --main-dark:#78472b;
+    --border:#ead9c9;
+    --danger:#c34d4d;
+    --success:#39835d;
+    --shadow:0 8px 25px rgba(77,45,25,.07);
+}
+
+body.dark {
+    --bg:#171310;
+    --card:#241e19;
+    --soft:#30261f;
+    --text:#f1e4d8;
+    --muted:#b49c89;
+    --main:#c18a5c;
+    --main-dark:#e0ad7e;
+    --border:#44352a;
+    --shadow:0 8px 25px rgba(0,0,0,.2);
+}
+
+* { box-sizing:border-box; }
+
+body {
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Tahoma,Arial,sans-serif;
+    transition:.25s;
+}
+
+button,input,select,textarea {
+    font-family:inherit;
+}
+
+button { cursor:pointer; }
+
+.admin-layout {
+    display:flex;
+    min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width:255px;
+    background:var(--card);
+    border-left:1px solid var(--border);
+    padding:25px 16px;
+    display:flex;
+    flex-direction:column;
+    flex-shrink:0;
+}
+
+.logo-area {
+    text-align:center;
+    padding:5px 0 28px;
+    border-bottom:1px solid var(--border);
+    margin-bottom:25px;
+}
+
+.logo-area img {
+    width:78px;
+    height:78px;
+    object-fit:contain;
+    border-radius:50%;
+    background:#fff;
+    padding:5px;
+}
+
+.logo-area h2 {
+    font-size:18px;
+    margin:10px 0 4px;
+    color:var(--main);
+}
+
+.logo-area p {
+    color:var(--muted);
+    font-size:11px;
+    margin:0;
+}
+
+.menu-title {
+    font-size:11px;
+    color:var(--muted);
+    padding:0 13px;
+    margin:15px 0 10px;
+}
+
+.nav-btn {
+    width:100%;
+    border:0;
+    background:transparent;
+    color:var(--muted);
+    padding:13px 14px;
+    border-radius:10px;
+    text-align:right;
+    display:flex;
+    align-items:center;
+    gap:13px;
+    margin-bottom:5px;
+    font-size:13px;
+    transition:.2s;
+}
+
+.nav-btn i {
+    width:19px;
+    text-align:center;
+    font-size:15px;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+    background:var(--soft);
+    color:var(--main);
+}
+
+.sidebar-bottom {
+    margin-top:auto;
+    padding-top:20px;
+    border-top:1px solid var(--border);
+}
+
+.store-link {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--muted);
+    text-decoration:none;
+    padding:12px;
+    font-size:12px;
+}
+
+/* MAIN */
+
+.main-content {
+    flex:1;
+    min-width:0;
+    padding:25px 30px;
+}
+
+.topbar {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:30px;
+}
+
+.page-heading h1 {
+    font-size:23px;
+    margin:0 0 7px;
+}
+
+.page-heading p {
+    color:var(--muted);
+    font-size:12px;
+    margin:0;
+}
+
+.top-actions {
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.icon-btn {
+    width:42px;
+    height:42px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--main);
+    border-radius:11px;
+    font-size:16px;
+}
+
+.icon-btn:hover { background:var(--soft); }
+
+.admin-user {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:7px 12px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:11px;
+    font-size:12px;
+}
+
+.admin-user i {
+    color:var(--main);
+    font-size:20px;
+}
+
+/* SECTIONS */
+
+.section { display:none; }
+.section.active { display:block; }
+
+.section-title {
+    font-size:18px;
+    margin:0 0 20px;
+}
+
+.stats-grid {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:17px;
+    margin-bottom:25px;
+}
+
+.stat-card {
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:20px;
+    box-shadow:var(--shadow);
+}
+
+.stat-top {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.stat-icon {
+    width:43px;
+    height:43px;
+    border-radius:12px;
+    background:var(--soft);
+    display:grid;
+    place-items:center;
+    color:var(--main);
+    font-size:18px;
+}
+
+.stat-card h3 {
+    font-size:24px;
+    margin:18px 0 6px;
+}
+
+.stat-card p {
+    font-size:12px;
+    color:var(--muted);
+    margin:0;
+}
+
+.panel {
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:22px;
+    box-shadow:var(--shadow);
+    margin-bottom:20px;
+}
+
+.panel-heading {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:18px;
+}
+
+.panel-heading h3 {
+    font-size:15px;
+    margin:0;
+}
+
+.muted {
+    color:var(--muted);
+    font-size:12px;
+}
+
+.empty-state {
+    text-align:center;
+    padding:45px 15px;
+    color:var(--muted);
+}
+
+.empty-state i {
+    font-size:32px;
+    margin-bottom:12px;
+    color:var(--main);
+}
+
+.empty-state p {
+    font-size:13px;
+}
+
+/* BUTTONS */
+
+.btn {
+    border:0;
+    border-radius:9px;
+    padding:11px 17px;
+    font-size:12px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    transition:.2s;
+}
+
+.btn-primary {
+    background:var(--main);
+    color:#fff;
+}
+
+.btn-primary:hover { background:var(--main-dark); }
+
+.btn-light {
+    background:var(--soft);
+    color:var(--main);
+}
+
+.btn-danger {
+    background:#f8e5e3;
+    color:var(--danger);
+}
+
+body.dark .btn-danger {
+    background:#492725;
+}
+
+.btn-success {
+    background:#e2f1e7;
+    color:var(--success);
+}
+
+body.dark .btn-success {
+    background:#244433;
+}
+
+.btn:disabled {
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+/* TABLES */
+
+.table-wrap {
+    overflow-x:auto;
+}
+
+table {
+    width:100%;
+    border-collapse:collapse;
+    min-width:650px;
+}
+
+th,td {
+    padding:14px 12px;
+    text-align:right;
+    border-bottom:1px solid var(--border);
+    font-size:12px;
+}
+
+th {
+    color:var(--muted);
+    font-weight:normal;
+    background:var(--soft);
+}
+
+td { color:var(--text); }
+
+.product-cell {
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.product-cell img {
+    width:43px;
+    height:43px;
+    border-radius:8px;
+    object-fit:cover;
+    background:var(--soft);
+}
+
+.actions {
+    display:flex;
+    gap:7px;
+}
+
+.small-btn {
+    width:32px;
+    height:32px;
+    border:0;
+    border-radius:7px;
+    background:var(--soft);
+    color:var(--main);
+}
+
+.small-btn.delete { color:var(--danger); }
+
+.status {
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:10px;
+    background:var(--soft);
+    color:var(--main);
+}
+
+/* FORMS */
+
+.form-grid {
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.form-group {
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.form-group.full { grid-column:1/-1; }
+
+.form-group label {
+    font-size:12px;
+    color:var(--muted);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width:100%;
+    padding:12px;
+    background:var(--bg);
+    color:var(--text);
+    border:1px solid var(--border);
+    border-radius:9px;
+    outline:none;
+    font-size:12px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color:var(--main);
+}
+
+.form-group textarea {
+    min-height:90px;
+    resize:vertical;
+}
+
+.form-actions {
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
+/* UPLOAD */
+ .upload-area {
+    width:100%;
+    min-height:170px;
+    border:2px dashed var(--border);
+    background:var(--bg);
+    border-radius:13px;
+    padding:25px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    cursor:pointer;
+    transition:.2s;
+    overflow:hidden;
+}
+
+.upload-area:hover {
+    border-color:var(--main);
+    background:var(--soft);
+}
+
+.upload-area i {
+    font-size:30px;
+    color:var(--main);
+    margin-bottom:12px;
+}
+
+.upload-area h4 {
+    font-size:13px;
+    margin:0 0 10px;
+    line-height:1.8;
+}
+
+.upload-area p {
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.8;
+    margin:0;
+}
+
+.preview-grid {
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:13px;
+}
+
+.preview-item {
+    width:85px;
+    height:85px;
+    border:1px solid var(--border);
+    border-radius:9px;
+    overflow:hidden;
+    background:var(--soft);
+    position:relative;
+}
+
+.preview-item img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.preview-item .file-icon {
+    height:100%;
+    display:grid;
+    place-items:center;
+    color:var(--main);
+    font-size:25px;
+}
+
+.preview-item button {
+    position:absolute;
+    top:4px;
+    left:4px;
+    width:22px;
+    height:22px;
+    border:0;
+    border-radius:50%;
+    color:white;
+    background:#b74444;
+    font-size:11px;
+}
+
+/* SETTINGS */
+
+.settings-row {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:17px 0;
+    border-bottom:1px solid var(--border);
+    font-size:13px;
+}
+
+.settings-row:last-child { border:0; }
+
+/* MODAL */
+
+.modal {
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:100;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.show { display:flex; }
+
+.modal-content {
+    background:var(--card);
+    width:650px;
+    max-width:100%;
+    max-height:90vh;
+    overflow-y:auto;
+    border-radius:17px;
+    padding:25px;
+}
+
+.modal-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
+}
+
+.modal-header h2 {
+    font-size:18px;
+    margin:0;
+}
+
+.close-modal {
+    border:0;
+    background:var(--soft);
+    color:var(--main);
+    width:35px;
+    height:35px;
+    border-radius:9px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px) {
+    .sidebar { width:205px; }
+    .main-content { padding:20px; }
+    .stats-grid { grid-template-columns:repeat(2,1fr); }
+}
+
+@media(max-width:650px) {
+    .sidebar {
+        width:65px;
+        padding:15px 7px;
+    }
+
+    .logo-area img { width:43px;height:43px; }
+    .logo-area h2,.logo-area p,.menu-title,
+    .nav-btn span,.store-link span { display:none; }
+
+    .nav-btn {
+        justify-content:center;
+        padding:14px 5px;
+    }
+
+    .nav-btn i { font-size:17px; }
+    .store-link { justify-content:center; }
+    .main-content { padding:15px; }
+    .stats-grid { gap:10px; }
+    .stat-card { padding:14px; }
+    .stat-card h3 { font-size:20px; }
+    .topbar { align-items:flex-start; }
+    .admin-user span { display:none; }
+    .form-grid { grid-template-columns:1fr; }
+    .form-group.full { grid-column:auto; }
+}
+
+/* LANGUAGE */
+
+body.en { direction:ltr; }
+body.en .nav-btn,
+body.en th,
+body.en td,
+body.en .store-link { text-align:left; }
+
+body.en .sidebar { border-left:0;border-right:1px solid var(--border); }
+
+body.en .product-cell { flex-direction:row; }
+
+/* HERO MANAGEMENT */
+
+.hero-admin-list {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+}
+
+.hero-admin-card {
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:13px;
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:12px;
+    min-width:0;
+}
+
+.hero-admin-card img {
+    width:145px;
+    height:85px;
+    object-fit:cover;
+    border-radius:8px;
+    flex-shrink:0;
+    background:var(--soft);
+}
+
+.hero-admin-info {
+    flex:1;
+    min-width:0;
+}
+
+.hero-admin-info strong {
+    display:block;
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+.hero-admin-status {
+    font-size:11px;
+    color:var(--success);
+}
+
+.hero-admin-status.off {
+    color:var(--danger);
+}
+
+.hero-admin-actions {
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-top:10px;
+}
+
+.hero-admin-actions button {
+    width:30px;
+    height:30px;
+    border:0;
+    border-radius:7px;
+    background:var(--soft);
+    color:var(--main);
+}
+
+.hero-admin-toggle {
+    display:flex;
+    align-items:center;
+    gap:7px;
+    font-size:11px;
+    color:var(--muted);
+    cursor:pointer;
+}
+
+.hero-admin-toggle input {
+    accent-color:var(--main);
+    width:16px;
+    height:16px;
+}
+
+@media(max-width:1000px) {
+    .hero-admin-list {
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:650px) {
+    .hero-admin-card img {
+        width:105px;
+        height:75px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <div class="logo-area">
+        <img src="imges/logo.png" alt="ALMUZN">
+        <h2>المزن للعطور</h2>
+        <p>ALMUZN FOR PERFUME</p>
+    </div>
+
+    <div class="menu-title" data-ar="القائمة الرئيسية" data-en="MAIN MENU">القائمة الرئيسية</div>
+
+    <button class="nav-btn active" data-section="dashboard">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span data-ar="الرئيسية" data-en="Dashboard">الرئيسية</span>
+    </button>
+
+    <button class="nav-btn" data-section="products">
+        <i class="fa-solid fa-box"></i>
+        <span data-ar="المنتجات" data-en="Products">المنتجات</span>
+    </button>
+
+    <button class="nav-btn" data-section="orders">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span data-ar="الطلبات" data-en="Orders">الطلبات</span>
+    </button>
+
+    <button class="nav-btn" data-section="payments">
+        <i class="fa-solid fa-wallet"></i>
+        <span data-ar="المدفوعات" data-en="Payments">المدفوعات</span>
+    </button>
+
+    <button class="nav-btn" data-section="files">
+        <i class="fa-solid fa-folder-open"></i>
+       <span data-ar="إدارة الهيرو" data-en="Hero Management">إدارة الهيرو</span>
+    </button>
+
+    <div class="menu-title" data-ar="النظام" data-en="SYSTEM">النظام</div>
+
+    <button class="nav-btn" data-section="settings">
+        <i class="fa-solid fa-gear"></i>
+        <span data-ar="الإعدادات" data-en="Settings">الإعدادات</span>
+    </button>
+
+    <div class="sidebar-bottom">
+        <a href="index.html" target="_blank" class="store-link">
+            <i class="fa-solid fa-store"></i>
+            <span data-ar="زيارة المتجر" data-en="Visit Store">زيارة المتجر</span>
+        </a>
+    </div>
+
+</aside>
+
+<!-- MAIN -->
+<main class="main-content">
+
+    <header class="topbar">
+
+        <div class="page-heading">
+            <h1 id="pageTitle">لوحة التحكم</h1>
+            <p data-ar="مرحباً بك في إدارة متجر المزن للعطور"
+               data-en="Welcome to ALMUZN store management">
+               مرحباً بك في إدارة متجر المزن للعطور
+            </p>
+        </div>
+
+        <div class="top-actions">
+
+            <button class="icon-btn" id="langBtn" title="Language">
+                <i class="fa-solid fa-globe"></i>
+            </button>
+
+            <button class="icon-btn" id="themeBtn" title="Theme">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+
+            <div class="admin-user">
+                <i class="fa-solid fa-circle-user"></i>
+                <span data-ar="مدير المتجر" data-en="Store Admin">مدير المتجر</span>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section class="section active" id="dashboard">
+
+        <h2 class="section-title" data-ar="نظرة عامة" data-en="Overview">نظرة عامة</h2>
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span class="muted" data-ar="إجمالي المنتجات" data-en="Total Products">إجمالي المنتجات</span>
+                    <div class="stat-icon"><i class="fa-solid fa-box"></i></div>
+                </div>
+                <h3 id="statProducts">0</h3>
+                <p data-ar="المنتجات المسجلة محلياً" data-en="Locally saved products">المنتجات المسجلة محلياً</p>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span class="muted" data-ar="إجمالي الطلبات" data-en="Total Orders">إجمالي الطلبات</span>
+                    <div class="stat-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+                </div>
+                <h3 id="statOrders">0</h3>
+                <p data-ar="الطلبات المسجلة" data-en="Registered orders">الطلبات المسجلة</p>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span class="muted" data-ar="الطلبات الجديدة" data-en="New Orders">الطلبات الجديدة</span>
+                    <div class="stat-icon"><i class="fa-solid fa-clock"></i></div>
+                </div>
+                <h3 id="statPending">0</h3>
+                <p data-ar="بانتظار المراجعة" data-en="Awaiting review">بانتظار المراجعة</p>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span class="muted" data-ar="المبيعات" data-en="Sales">المبيعات</span>
+                    <div class="stat-icon"><i class="fa-solid fa-coins"></i></div>
+                </div>
+                <h3 id="statSales">0</h3>
+                <p data-ar="قيمة الطلبات المؤكدة" data-en="Confirmed order value">قيمة الطلبات المؤكدة</p>
+            </div>
+
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 data-ar="أحدث المنتجات" data-en="Recent Products">أحدث المنتجات</h3>
+                <button class="btn btn-light" onclick="showSection('products')"
+                    data-ar="عرض الكل" data-en="View All">عرض الكل</button>
+            </div>
+            <div id="recentProducts"></div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 data-ar="أحدث الطلبات" data-en="Recent Orders">أحدث الطلبات</h3>
+                <button class="btn btn-light" onclick="showSection('orders')"
+                    data-ar="عرض الكل" data-en="View All">عرض الكل</button>
+            </div>
+            <div id="recentOrders"></div>
+        </div>
+
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="section" id="products">
+
+        <div class="panel-heading">
+            <h2 class="section-title" data-ar="إدارة المنتجات" data-en="Products Management">إدارة المنتجات</h2>
+            <button class="btn btn-primary" onclick="openProductModal()">
+                <i class="fa-solid fa-plus"></i>
+                <span data-ar="إضافة منتج" data-en="Add Product">إضافة منتج</span>
+            </button>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 data-ar="قائمة المنتجات" data-en="Products List">قائمة المنتجات</h3>
+                <input id="productSearch" placeholder="ابحث عن منتج..."
+                    data-placeholder-ar="ابحث عن منتج..."
+                    data-placeholder-en="Search products..."
+                    style="max-width:230px;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text)">
+            </div>
+            <div id="productsTable"></div>
+        </div>
+
+    </section>
+
+    <!-- ORDERS -->
+    <section class="section" id="orders">
+
+        <h2 class="section-title" data-ar="إدارة الطلبات" data-en="Orders Management">إدارة الطلبات</h2>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 data-ar="جميع الطلبات" data-en="All Orders">جميع الطلبات</h3>
+                <span class="muted" data-ar="تظهر الطلبات بعد ربط قاعدة البيانات"
+                    data-en="Orders will appear after database connection">
+                    تظهر الطلبات بعد ربط قاعدة البيانات
+                </span>
+            </div>
+            <div id="ordersTable"></div>
+        </div>
+
+    </section>
+
+    <!-- PAYMENTS -->
+    <section class="section" id="payments">
+
+        <h2 class="section-title" data-ar="إدارة المدفوعات" data-en="Payments Management">إدارة المدفوعات</h2>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 data-ar="سجل المدفوعات" data-en="Payment Records">سجل المدفوعات</h3>
+            </div>
+            <div id="paymentsTable"></div>
+        </div>
+
+    </section>
+
+    <!-- FILES -->
+     
+<!-- HERO MANAGEMENT -->
+<section class="section" id="files">
+
+    <h2 class="section-title"
+        data-ar="إدارة الهيرو"
+        data-en="Hero Management">إدارة الهيرو</h2>
+
+    <div class="panel">
+
+        <div class="panel-heading">
+            <h3 data-ar="صور البنر الرئيسي"
+                data-en="Hero Slider Images">صور البنر الرئيسي</h3>
+
+            <button class="btn btn-light" onclick="resetHeroSettings()">
+                <i class="fa-solid fa-rotate-left"></i>
+                <span data-ar="استعادة الافتراضي"
+                      data-en="Restore Default">استعادة الافتراضي</span>
+            </button>
+        </div>
+
+        <p class="muted" style="line-height:2;margin-bottom:20px"
+           data-ar="تحكم في الصور التي تظهر في البنر الرئيسي وترتيب ظهورها."
+           data-en="Control which images appear in the main banner and their display order.">
+           تحكم في الصور التي تظهر في البنر الرئيسي وترتيب ظهورها.
+        </p>
+<div style="margin-bottom:20px">
+
+    <label for="heroImageUpload" class="btn btn-primary">
+        <i class="fa-solid fa-cloud-arrow-up"></i>
+        <span data-ar="إضافة صورة جديدة" data-en="Add New Image">
+            إضافة صورة جديدة
+        </span>
+    </label>
+
+    <input
+        type="file"
+        id="heroImageUpload"
+        accept="image/*"
+        hidden
+    >
+
+    <p class="muted" style="margin-top:10px;line-height:1.8"
+       data-ar="اختر صورة من جهازك. سيتم ضغطها تلقائياً قبل إضافتها."
+       data-en="Choose an image from your device. It will be compressed automatically before adding.">
+       اختر صورة من جهازك. سيتم ضغطها تلقائياً قبل إضافتها.
+    </p>
+
+</div>
+        <div id="heroAdminList" class="hero-admin-list"></div>
+
+        <div class="form-actions">
+            <button class="btn btn-primary" onclick="saveHeroSettings()">
+                <i class="fa-solid fa-floppy-disk"></i>
+                <span data-ar="حفظ التغييرات"
+                      data-en="Save Changes">حفظ التغييرات</span>
+            </button>
+        </div>
+
+        <p class="muted" style="margin-top:15px;line-height:2"
+           data-ar="الصور الأصلية محفوظة داخل مجلد imges. هذه الإعدادات تتحكم في عرضها فقط."
+           data-en="Original images remain in the imges folder. These settings only control their display.">
+           الصور الأصلية محفوظة داخل مجلد imges. هذه الإعدادات تتحكم في عرضها فقط.
+        </p>
+
+    </div>
+</section>
+
+
+    <!-- SETTINGS -->
+    <section class="section" id="settings">
+
+        <h2 class="section-title" data-ar="إعدادات المتجر" data-en="Store Settings">إعدادات المتجر</h2>
+
+        <div class="panel">
+
+            <div class="settings-row">
+                <div>
+                    <strong data-ar="اسم المتجر" data-en="Store Name">اسم المتجر</strong>
+                    <p class="muted">ALMUZN FOR PERFUME</p>
+                </div>
+                <i class="fa-solid fa-store" style="color:var(--main)"></i>
+            </div>
+
+            <div class="settings-row">
+                <div>
+                    <strong data-ar="رقم التواصل" data-en="Contact Number">رقم التواصل</strong>
+                    <p class="muted" dir="ltr">+249 12 910 9531</p>
+                </div>
+                <i class="fa-solid fa-phone" style="color:var(--main)"></i>
+            </div>
+
+            <div class="settings-row">
+                <div>
+                    <strong data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</strong>
+                    <p class="muted">Almuznperfume@gmail.com</p>
+                </div>
+                <i class="fa-solid fa-envelope" style="color:var(--main)"></i>
+            </div>
+
+            <div class="settings-row">
+                <div>
+                    <strong data-ar="قاعدة البيانات" data-en="Database">قاعدة البيانات</strong>
+                    <p class="muted" data-ar="لم يتم ربط Supabase بعد"
+                       data-en="Supabase is not connected yet">
+                       لم يتم ربط Supabase بعد
+                    </p>
+                </div>
+                <span class="status" data-ar="غير متصل" data-en="Not connected">غير متصل</span>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal" id="productModal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h2 id="modalTitle">إضافة منتج جديد</h2>
+            <button class="close-modal" onclick="closeProductModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <form id="productForm">
+
+            <input type="hidden" id="editProductId">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label data-ar="اسم المنتج بالعربية" data-en="Product Name (Arabic)">اسم المنتج بالعربية</label>
+                    <input id="productName" required>
+                </div>
+
+                <div class="form-group">
+                    <label data-ar="اسم المنتج بالإنجليزية" data-en="Product Name (English)">اسم المنتج بالإنجليزية</label>
+                    <input id="productEn">
+                </div>
+
+                <div class="form-group">
+                    <label data-ar="السعر" data-en="Price">السعر</label>
+                    <input type="number" id="productPrice" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label data-ar="السعر القديم (اختياري)" data-en="Old Price (Optional)">السعر القديم (اختياري)</label>
+                    <input type="number" id="productOld" min="0">
+                </div>
+
+                <div class="form-group">
+                    <label data-ar="القسم" data-en="Category">القسم</label>
+                    <select id="productCategory">
+                        <option value="men">رجالي / Men</option>
+                        <option value="women">نسائي / Women</option>
+                        <option value="offers">عروض / Offers</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label data-ar="التوفر" data-en="Availability">التوفر</label>
+                    <select id="productStock">
+                        <option value="true">متوفر / Available</option>
+                        <option value="false">غير متوفر / Unavailable</option>
+                    </select>
+                </div>
+
+                <div class="form-group full">
+                    <label data-ar="وصف المنتج" data-en="Description">وصف المنتج</label>
+                    <textarea id="productDesc"></textarea>
+                </div>
+
+                <div class="form-group full">
+                    <label data-ar="صورة المنتج" data-en="Product Image">صورة المنتج</label>
+
+                    <label class="upload-area" for="productImage">
+                        <i class="fa-solid fa-image"></i>
+                        <h4 data-ar="اختر صورة المنتج" data-en="Choose Product Image">اختر صورة المنتج</h4>
+                        <p data-ar="سيتم ضغط الصورة المدعومة تلقائياً"
+                           data-en="Supported images will be compressed automatically">
+                           سيتم ضغط الصورة المدعومة تلقائياً
+                        </p>
+                    </label>
+
+                    <input type="file" id="productImage" accept="image/*" hidden>
+                    <div class="preview-grid" id="productImagePreview"></div>
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    <span data-ar="حفظ المنتج" data-en="Save Product">حفظ المنتج</span>
+                </button>
+                <button type="button" class="btn btn-light" onclick="closeProductModal()"
+                    data-ar="إلغاء" data-en="Cancel">إلغاء</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script>
+
+/* =========================
+   STORAGE
+========================= */
+
+const PRODUCTS_KEY = 'almuzn_products';
+
+function getProducts() {
+    try {
+        return JSON.parse(localStorage.getItem(PRODUCTS_KEY)) || [];
+    } catch {
+        return [];
+    }
+}
+
+function saveProducts(products) {
+    localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
+}
+
+function getOrders() {
+    try {
+        return JSON.parse(localStorage.getItem('almuzn_orders')) || [];
+    } catch {
+        return [];
+    }
+}
+
+/* =========================
+   LANGUAGE
+========================= */
+
+let lang = localStorage.getItem('almuzn_lang') || 'ar';
+
+function setLanguage() {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.body.classList.toggle('en', lang === 'en');
+
+    document.querySelectorAll('[data-ar]').forEach(el => {
+        el.textContent = el.dataset[lang];
+    });
+
+    document.querySelectorAll('[data-placeholder-ar]').forEach(el => {
+        el.placeholder = el.dataset['placeholder' + (lang === 'ar' ? 'Ar' : 'En')];
+    });
+
+    document.getElementById('langBtn').title =
+        lang === 'ar' ? 'English' : 'العربية';
+
+    updatePageTitle();
+}
+
+document.getElementById('langBtn').addEventListener('click', () => {
+    lang = lang === 'ar' ? 'en' : 'ar';
+    localStorage.setItem('almuzn_lang', lang);
+    setLanguage();
+    renderAll();
+});
+
+/* =========================
+   THEME
+========================= */
+
+let theme = localStorage.getItem('almuzn_theme') || 'light';
+
+function setTheme() {
+    document.body.classList.toggle('dark', theme === 'dark');
+
+    document.getElementById('themeBtn').innerHTML =
+        theme === 'dark'
+        ? '<i class="fa-solid fa-sun"></i>'
+        : '<i class="fa-solid fa-moon"></i>';
+}
+
+document.getElementById('themeBtn').addEventListener('click', () => {
+    theme = theme === 'light' ? 'dark' : 'light';
+    localStorage.setItem('almuzn_theme', theme);
+    setTheme();
+});
+
+/* =========================
+   NAVIGATION
+========================= */
+
+const sectionTitles = {
+    dashboard: ['لوحة التحكم','Dashboard'],
+    products: ['إدارة المنتجات','Products Management'],
+    orders: ['إدارة الطلبات','Orders Management'],
+    payments: ['إدارة المدفوعات','Payments Management'],
+     files: ['إدارة الهيرو','Hero Management'],
+    settings: ['إعدادات المتجر','Store Settings']
+};
+
+function updatePageTitle() {
+    const active = document.querySelector('.section.active');
+    if (!active) return;
+
+    const titles = sectionTitles[active.id];
+    document.getElementById('pageTitle').textContent =
+        titles[lang === 'ar' ? 0 : 1];
+}
+
+function showSection(id) {
+    document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+    });
+
+    document.querySelectorAll('.nav-btn').forEach(button => {
+        button.classList.remove('active');
+    });
+
+    document.getElementById(id).classList.add('active');
+
+    const button = document.querySelector(
+        `.nav-btn[data-section="${id}"]`
+    );
+
+    if (button) button.classList.add('active');
+
+    updatePageTitle();
+    renderAll();
+}
+
+document.querySelectorAll('.nav-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        showSection(button.dataset.section);
+    });
+});
+
+/* =========================
+   IMAGE COMPRESSION
+========================= */
+
+async function compressImage(file) {
+
+    const supportedTypes = [
+        'image/jpeg',
+        'image/png',
+        'image/webp'
+    ];
+
+    if (!supportedTypes.includes(file.type)) {
+        return file;
+    }
+
+    if (file.size < 150 * 1024) {
+        return file;
+    }
+
+    try {
+        const bitmap = await createImageBitmap(file);
+
+        const maxWidth = 1200;
+        const scale = Math.min(1, maxWidth / bitmap.width);
+
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.round(bitmap.width * scale);
+        canvas.height = Math.round(bitmap.height * scale);
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+        bitmap.close();
+
+        const blob = await new Promise(resolve => {
+            canvas.toBlob(resolve, 'image/webp', 0.78);
+        });
+
+        if (!blob || blob.size >= file.size) {
+            return file;
+        }
+
+        return new File(
+            [blob],
+            file.name.replace(/\.[^.]+$/, '') + '.webp',
+            { type:'image/webp' }
+        );
+
+    } catch(error) {
+        console.warn('Image compression skipped:', error);
+        return file;
+    }
+}
+
+/* =========================
+   PRODUCT IMAGE
+========================= */
+
+let selectedProductImage = null;
+let currentProductImage = '';
+
+document.getElementById('productImage').addEventListener('change', async event => {
+
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+        alert(lang === 'ar'
+            ? 'يرجى اختيار ملف صورة للمنتج.'
+            : 'Please choose an image file.');
+        event.target.value = '';
+        return;
+    }
+
+    selectedProductImage = await compressImage(file);
+
+    const reader = new FileReader();
+
+    reader.onload = e => {
+        currentProductImage = e.target.result;
+
+        document.getElementById('productImagePreview').innerHTML =
+            `<div class="preview-item">
+                <img src="${currentProductImage}" alt="Preview">
+            </div>`;
+    };
+
+    reader.readAsDataURL(selectedProductImage);
+});
+
+/* =========================
+   PRODUCT MODAL
+========================= */
+
+function openProductModal(id = null) {
+
+    document.getElementById('productForm').reset();
+    document.getElementById('editProductId').value = '';
+    document.getElementById('productImagePreview').innerHTML = '';
+
+    selectedProductImage = null;
+    currentProductImage = '';
+
+    if (id !== null) {
+        const product = getProducts().find(p => String(p.id) === String(id));
+        if (!product) return;
+
+        document.getElementById('editProductId').value = product.id;
+        document.getElementById('productName').value = product.name || '';
+        document.getElementById('productEn').value = product.en || '';
+        document.getElementById('productPrice').value = product.price || '';
+        document.getElementById('productOld').value = product.old || '';
+        document.getElementById('productCategory').value = product.category || 'men';
+        document.getElementById('productStock').value = String(product.stock !== false);
+        document.getElementById('productDesc').value = product.desc || '';
+
+        currentProductImage = product.image || '';
+
+        if (currentProductImage) {
+            document.getElementById('productImagePreview').innerHTML =
+                `<div class="preview-item">
+                    <img src="${currentProductImage}" alt="Product">
+                </div>`;
+        }
+
+        document.getElementById('modalTitle').textContent =
+            lang === 'ar' ? 'تعديل المنتج' : 'Edit Product';
+
+    } else {
+        document.getElementById('modalTitle').textContent =
+            lang === 'ar' ? 'إضافة منتج جديد' : 'Add New Product';
+    }
+
+    document.getElementById('productModal').classList.add('show');
+}
+
+function closeProductModal() {
+    document.getElementById('productModal').classList.remove('show');
+}
+
+document.getElementById('productModal').addEventListener('click', e => {
+    if (e.target.id === 'productModal') closeProductModal();
+});
+
+/* =========================
+   SAVE PRODUCT
+========================= */
+
+document.getElementById('productForm').addEventListener('submit', event => {
+
+    event.preventDefault();
+
+    const products = getProducts();
+    const editId = document.getElementById('editProductId').value;
+
+    const product = {
+        id: editId || Date.now(),
+        name: document.getElementById('productName').value.trim(),
+        en: document.getElementById('productEn').value.trim(),
+        price: Number(document.getElementById('productPrice').value),
+        old: Number(document.getElementById('productOld').value) || 0,
+        category: document.getElementById('productCategory').value,
+        stock: document.getElementById('productStock').value === 'true',
+        desc: document.getElementById('productDesc').value.trim(),
+        image: currentProductImage
+    };
+
+    if (editId) {
+        const index = products.findIndex(p => String(p.id) === String(editId));
+        if (index !== -1) products[index] = product;
+    } else {
+        products.unshift(product);
+    }
+
+    try {
+        saveProducts(products);
+    } catch(error) {
+        alert(lang === 'ar'
+            ? 'تعذر الحفظ بسبب مساحة التخزين المحلية. سنحتاج إلى ربط التخزين السحابي.'
+            : 'Could not save because local storage is full. Cloud storage connection is needed.');
+        return;
+    }
+
+    closeProductModal();
+    renderAll();
+
+    alert(lang === 'ar' ? 'تم حفظ المنتج محلياً.' : 'Product saved locally.');
+});
+
+/* =========================
+   DELETE PRODUCT
+========================= */
+
+function deleteProduct(id) {
+
+    const confirmDelete = confirm(
+        lang === 'ar' ? 'هل تريد حذف هذا المنتج؟' : 'Delete this product?'
+    );
+
+    if (!confirmDelete) return;
+
+    const products = getProducts().filter(p => String(p.id) !== String(id));
+    saveProducts(products);
+    renderAll();
+}
+
+/* =========================
+   PRODUCTS TABLE
+========================= */
+
+function renderProducts() {
+
+    const products = getProducts();
+    const search = (document.getElementById('productSearch')?.value || '').toLowerCase();
+
+    const filtered = products.filter(p =>
+        (p.name || '').toLowerCase().includes(search) ||
+        (p.en || '').toLowerCase().includes(search)
+    );
+
+    const container = document.getElementById('productsTable');
+
+    if (!filtered.length) {
+        container.innerHTML = emptyState(
+            'fa-box-open',
+            lang === 'ar' ? 'لا توجد منتجات حالياً' : 'No products yet'
+        );
+        return;
+    }
+
+    container.innerHTML = `
+        <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>${lang === 'ar' ? 'المنتج' : 'Product'}</th>
+                    <th>${lang === 'ar' ? 'السعر' : 'Price'}</th>
+                    <th>${lang === 'ar' ? 'القسم' : 'Category'}</th>
+                    <th>${lang === 'ar' ? 'التوفر' : 'Availability'}</th>
+                    <th>${lang === 'ar' ? 'الإجراءات' : 'Actions'}</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${filtered.map(p => `
+                    <tr>
+                        <td>
+                            <div class="product-cell">
+                                <img src="${safeImage(p.image)}" alt="">
+                                <span>${escapeHTML(p.name || '')}</span>
+                            </div>
+                        </td>
+                        <td>${Number(p.price || 0).toLocaleString()} </td>
+                        <td>${escapeHTML(p.category || '')}</td>
+                        <td>
+                            <span class="status">
+                                ${p.stock === false
+                                    ? (lang === 'ar' ? 'غير متوفر' : 'Unavailable')
+                                    : (lang === 'ar' ? 'متوفر' : 'Available')}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <button class="small-btn" onclick="openProductModal('${p.id}')">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                <button class="small-btn delete" onclick="deleteProduct('${p.id}')">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+        </div>
+    `;
+}
+
+document.getElementById('productSearch').addEventListener('input', renderProducts);
+
+/* =========================
+   ORDERS
+========================= */
+
+function renderOrders() {
+
+    const orders = getOrders();
+    const container = document.getElementById('ordersTable');
+
+    if (!orders.length) {
+        container.innerHTML = emptyState(
+            'fa-cart-shopping',
+            lang === 'ar'
+                ? 'لا توجد طلبات متاحة. ستظهر الطلبات بعد ربط قاعدة البيانات.'
+                : 'No orders yet. Orders will appear after database connection.'
+        );
+        return;
+    }
+
+    container.innerHTML = `
+        <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>${lang === 'ar' ? 'رقم الطلب' : 'Order ID'}</th>
+                    <th>${lang === 'ar' ? 'العميل' : 'Customer'}</th>
+                    <th>${lang === 'ar' ? 'الإجمالي' : 'Total'}</th>
+                    <th>${lang === 'ar' ? 'الحالة' : 'Status'}</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${orders.map(order => `
+                    <tr>
+                        <td>${escapeHTML(String(order.id || '—'))}</td>
+                        <td>${escapeHTML(order.name || order.customerName || '—')}</td>
+                        <td>${Number(order.total || 0).toLocaleString()}</td>
+                        <td><span class="status">${escapeHTML(order.status || 'pending')}</span></td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+        </div>
+    `;
+}
+
+/* =========================
+   PAYMENTS
+========================= */
+
+function renderPayments() {
+
+    const container = document.getElementById('paymentsTable');
+
+    container.innerHTML = emptyState(
+        'fa-wallet',
+        lang === 'ar'
+            ? 'لا توجد مدفوعات متاحة حالياً. ستظهر هنا بعد ربط الطلبات وقاعدة البيانات.'
+            : 'No payment records yet. They will appear after database connection.'
+    );
+}
+ 
+/* =========================
+   HERO MANAGEMENT
+========================= */
+
+const HERO_KEY = 'almuzn_hero_settings';
+
+const defaultHeroImages = [
+    'imges/hero-1.jpg',
+    'imges/hero-2.jpg',
+    'imges/hero-3.jpg',
+    'imges/hero-4.jpg',
+    'imges/hero-5.jpg'
+];
+
+function getHeroSettings() {
+    try {
+        const saved = JSON.parse(localStorage.getItem(HERO_KEY));
+
+        if (!Array.isArray(saved) || !saved.length) {
+            return defaultHeroImages.map((src, index) => ({
+                src,
+                active: true,
+                order: index
+            }));
+        }
+
+        return saved;
+    } catch {
+        return defaultHeroImages.map((src, index) => ({
+            src,
+            active: true,
+            order: index
+        }));
+    }
+}
+
+let heroImages = getHeroSettings();
+/* ===== ADD NEW HERO IMAGE ===== */
+
+document.getElementById('heroImageUpload')
+.addEventListener('change', async function(event) {
+
+    const file = event.target.files[0];
+
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+        alert(lang === 'ar'
+            ? 'يرجى اختيار ملف صورة.'
+            : 'Please choose an image file.');
+        event.target.value = '';
+        return;
+    }
+
+    if (file.size > 15 * 1024 * 1024) {
+        alert(lang === 'ar'
+            ? 'حجم الصورة كبير جداً. الحد الأقصى 15 ميجابايت.'
+            : 'Image is too large. Maximum size is 15 MB.');
+        event.target.value = '';
+        return;
+    }
+
+    try {
+
+        const compressedFile = await compressImage(file);
+
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+
+            const imageData = e.target.result;
+
+            const newImage = {
+                src: imageData,
+                active: true,
+                order: heroImages.length
+            };
+
+            const previousImages = [...heroImages];
+
+            heroImages.push(newImage);
+
+            try {
+
+                localStorage.setItem(
+                    HERO_KEY,
+                    JSON.stringify(heroImages)
+                );
+
+                renderHeroAdmin();
+
+                alert(lang === 'ar'
+                    ? 'تمت إضافة الصورة بنجاح.'
+                    : 'Image added successfully.');
+
+            } catch(error) {
+
+                heroImages = previousImages;
+
+                alert(lang === 'ar'
+                    ? 'مساحة التخزين المحلية غير كافية لحفظ الصورة. استخدم صورة أصغر أو نحتاج إلى ربط التخزين السحابي.'
+                    : 'Local storage is full. Use a smaller image or connect cloud storage.');
+
+                renderHeroAdmin();
+
+            }
+
+            event.target.value = '';
+
+        };
+
+        reader.onerror = function() {
+            alert(lang === 'ar'
+                ? 'تعذرت قراءة الصورة.'
+                : 'Could not read the image.');
+
+            event.target.value = '';
+        };
+
+        reader.readAsDataURL(compressedFile);
+
+    } catch(error) {
+
+        console.error(error);
+
+        alert(lang === 'ar'
+            ? 'تعذرت معالجة الصورة.'
+            : 'Could not process the image.');
+
+        event.target.value = '';
+
+    }
+
+});
+function renderHeroAdmin() {
+
+    const container = document.getElementById('heroAdminList');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    heroImages.forEach((item, index) => {
+
+        const card = document.createElement('div');
+        card.className = 'hero-admin-card';
+
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = 'Hero image ' + (index + 1);
+
+        img.onerror = () => {
+            img.alt = 'Image not found';
+            img.style.opacity = '.3';
+        };
+
+        const info = document.createElement('div');
+        info.className = 'hero-admin-info';
+
+        const name = document.createElement('strong');
+        name.textContent = item.src.split('/').pop();
+
+        const status = document.createElement('div');
+        status.className = 'hero-admin-status' + (item.active ? '' : ' off');
+        status.textContent = item.active
+            ? (lang === 'ar' ? 'مفعّلة' : 'Active')
+            : (lang === 'ar' ? 'متوقفة' : 'Disabled');
+
+        const toggleLabel = document.createElement('label');
+        toggleLabel.className = 'hero-admin-toggle';
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = item.active;
+
+        checkbox.addEventListener('change', () => {
+            heroImages[index].active = checkbox.checked;
+            renderHeroAdmin();
+        });
+
+        const toggleText = document.createElement('span');
+        toggleText.textContent = lang === 'ar' ? 'عرض الصورة' : 'Show image';
+
+        toggleLabel.append(checkbox, toggleText);
+
+        const actions = document.createElement('div');
+        actions.className = 'hero-admin-actions';
+
+        const up = document.createElement('button');
+        up.type = 'button';
+        up.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
+        up.title = lang === 'ar' ? 'تقديم' : 'Move up';
+        up.disabled = index === 0;
+        up.onclick = () => moveHeroImage(index, -1);
+
+        const down = document.createElement('button');
+        down.type = 'button';
+        down.innerHTML = '<i class="fa-solid fa-arrow-down"></i>';
+        down.title = lang === 'ar' ? 'تأخير' : 'Move down';
+        down.disabled = index === heroImages.length - 1;
+        down.onclick = () => moveHeroImage(index, 1);
+
+        const del = document.createElement('button');
+del.type = 'button';
+del.innerHTML = '<i class="fa-solid fa-trash"></i>';
+del.title = lang === 'ar' ? 'حذف الصورة' : 'Delete image';
+del.style.color = 'var(--danger)';
+del.onclick = () => deleteHeroImage(index);
+
+actions.append(up, down, del);
+
+        info.append(name, status, toggleLabel, actions);
+        card.append(img, info);
+        container.appendChild(card);
+    });
+}
+
+function moveHeroImage(index, direction) {
+
+    const newIndex = index + direction;
+
+    if (newIndex < 0 || newIndex >= heroImages.length) return;
+
+    [heroImages[index], heroImages[newIndex]] =
+        [heroImages[newIndex], heroImages[index]];
+
+    renderHeroAdmin();
+}
+/* ===== DELETE HERO IMAGE ===== */
+
+function deleteHeroImage(index) {
+
+    const confirmed = confirm(
+        lang === 'ar'
+            ? 'هل أنت متأكد من حذف هذه الصورة من الهيرو؟'
+            : 'Are you sure you want to delete this hero image?'
+    );
+
+    if (!confirmed) return;
+
+    heroImages.splice(index, 1);
+
+    heroImages.forEach((image, i) => {
+        image.order = i;
+    });
+
+    renderHeroAdmin();
+}
+function saveHeroSettings() {
+
+    try {
+        localStorage.setItem(HERO_KEY, JSON.stringify(heroImages));
+
+        alert(lang === 'ar'
+            ? 'تم حفظ إعدادات الهيرو بنجاح.'
+            : 'Hero settings saved successfully.');
+
+    } catch(error) {
+        alert(lang === 'ar'
+            ? 'تعذر حفظ الإعدادات.'
+            : 'Could not save settings.');
+    }
+}
+
+function resetHeroSettings() {
+
+    const confirmed = confirm(
+        lang === 'ar'
+            ? 'هل تريد استعادة الصور الخمس وترتيبها الأصلي؟'
+            : 'Restore all five images and their original order?'
+    );
+
+    if (!confirmed) return;
+
+    heroImages = defaultHeroImages.map((src, index) => ({
+        src,
+        active: true,
+        order: index
+    }));
+
+    saveHeroSettings();
+    renderHeroAdmin();
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
+function renderDashboard() {
+
+    const products = getProducts();
+    const orders = getOrders();
+
+    const pending = orders.filter(order =>
+        ['pending','قيد المراجعة'].includes(order.status)
+    );
+
+    const sales = orders
+        .filter(order => ['confirmed','مؤكد'].includes(order.status))
+        .reduce((sum, order) => sum + Number(order.total || 0), 0);
+
+    document.getElementById('statProducts').textContent = products.length;
+    document.getElementById('statOrders').textContent = orders.length;
+    document.getElementById('statPending').textContent = pending.length;
+    document.getElementById('statSales').textContent = sales.toLocaleString();
+
+    const recent = products.slice(0,5);
+
+    document.getElementById('recentProducts').innerHTML =
+        recent.length
+        ? `<div class="table-wrap"><table>
+            <thead><tr>
+                <th>${lang === 'ar' ? 'المنتج' : 'Product'}</th>
+                <th>${lang === 'ar' ? 'السعر' : 'Price'}</th>
+            </tr></thead>
+            <tbody>
+                ${recent.map(p => `
+                    <tr>
+                        <td><div class="product-cell">
+                            <img src="${safeImage(p.image)}" alt="">
+                            <span>${escapeHTML(p.name || '')}</span>
+                        </div></td>
+                        <td>${Number(p.price || 0).toLocaleString()}</td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table></div>`
+        : emptyState('fa-box-open',
+            lang === 'ar' ? 'لم تتم إضافة منتجات بعد' : 'No products added yet');
+
+    document.getElementById('recentOrders').innerHTML =
+        emptyState('fa-cart-shopping',
+            lang === 'ar' ? 'لا توجد طلبات متاحة حالياً' : 'No orders available yet');
+}
+
+/* =========================
+   HELPERS
+========================= */
+
+function emptyState(icon, message) {
+    return `
+        <div class="empty-state">
+            <i class="fa-solid ${icon}"></i>
+            <p>${message}</p>
+        </div>
+    `;
+}
+
+function safeImage(src) {
+    return src || 'imges/logo.png';
+}
+
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#039;'
+    })[char]);
+}
+
+ function renderAll() {
+    renderProducts();
+    renderOrders();
+    renderPayments();
+    renderDashboard();
+    renderHeroAdmin();
+}
+
+/* =========================
+   START
+========================= */
+
+setTheme();
+setLanguage();
+renderAll();
+
+</script>
+
+</body>
+</html>
