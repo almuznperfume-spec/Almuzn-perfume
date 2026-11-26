@@ -1831,6 +1831,60 @@ html[dir="ltr"] .brand {
         0 0 35px rgba(231, 173, 83, 0.9),
         0 0 55px rgba(231, 173, 83, 0.6);
 }
+        /* تحسين الفوتر في الهاتف */
+@media (max-width: 768px) {
+
+    .site-footer {
+        width: 100%;
+        margin-top: 25px;
+        padding: 35px 22px 0;
+        box-sizing: border-box;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding-bottom: 28px;
+    }
+
+    .footer-brand {
+        text-align: center;
+        width: 100%;
+    }
+
+    .footer-links,
+    .footer-contact,
+    .footer-branches {
+        align-items: center;
+        text-align: center;
+        width: 100%;
+    }
+
+    .footer-contact p,
+    .footer-branches p {
+        justify-content: center;
+        text-align: right;
+        max-width: 100%;
+    }
+
+    .site-footer h3 {
+        font-size: 17px;
+        margin-bottom: 15px;
+    }
+
+    .footer-links a,
+    .footer-contact a,
+    .footer-contact p,
+    .footer-branches p {
+        font-size: 14px;
+        line-height: 1.9;
+    }
+
+    .footer-bottom {
+        padding: 16px 8px;
+        font-size: 12px;
+    }
+}
     </style>
 </head>
 
