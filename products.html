@@ -1,0 +1,1348 @@
+ 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>جميع العطور | المزن للعطور</title>
+
+<style>
+:root {
+    --bg:#fff8f1;
+    --card:#fffdfb;
+    --soft:#f7e8da;
+    --text:#49200f;
+    --muted:#967765;
+    --main:#8d350d;
+    --gold:#c78a3d;
+    --line:#ead7c8;
+    --head:#54200c;
+    --shadow:0 8px 24px #5e2a0f12;
+}
+
+body.dark {
+    --bg:#080706;
+    --card:#15110e;
+    --soft:#211912;
+    --text:#fff5e8;
+    --muted:#c3a98e;
+    --main:#e2a64f;
+    --gold:#e4aa51;
+    --line:#634322;
+    --head:#080706;
+    --shadow:0 8px 26px #0006;
+}
+
+* {box-sizing:border-box}
+
+html,body {
+    margin:0;
+    max-width:100%;
+    overflow-x:hidden;
+}
+
+body {
+    background:var(--bg);
+    color:var(--text);
+    font-family:Tahoma,Arial,sans-serif;
+    transition:background .25s,color .25s;
+}
+
+a {color:inherit;text-decoration:none}
+button,input,select {font:inherit}
+button {cursor:pointer}
+img {max-width:100%}
+
+.wrap {
+    width:min(1250px,95%);
+    margin:auto;
+}
+
+/* الهيدر */
+
+.main-header {
+    position:relative;
+    z-index:1000;
+    background:var(--card);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 4px 20px rgba(0,0,0,.045);
+}
+
+.headin {
+    min-height:83px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.brand {
+    display:flex;
+    align-items:center;
+    gap:11px;
+    direction:ltr;
+    color:var(--main);
+}
+
+.brand-info {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.brandname {
+    color:#a94d19;
+    font-size:25px;
+    font-weight:900;
+    line-height:1.5;
+    text-shadow:0 0 8px #c78a3d55;
+}
+
+.brand small {
+    color:#c78a3d;
+    font:bold 10px Georgia,serif;
+    letter-spacing:2.5px;
+}
+
+.brand-logo-frame {
+    width:100px;
+    height:100px;
+    min-width:100px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    border:1px solid #ead9bd;
+    border-radius:50%;
+    background:#fff;
+}
+
+.brand-logo {
+    width:125%;
+    height:125%;
+    max-width:none;
+    object-fit:contain;
+}
+
+body.dark .brandname {color:#f0c47d}
+body.dark .brand small {color:#e4aa51}
+
+.navigation-wrap {
+    display:flex;
+    justify-content:center;
+    padding:0 15px 13px;
+}
+
+.main-nav {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    padding:6px;
+    border:1px solid var(--line);
+    border-radius:50px;
+    background:var(--soft);
+}
+
+.main-nav a {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 21px;
+    border-radius:30px;
+    color:var(--text);
+    font-size:13px;
+    font-weight:700;
+    white-space:nowrap;
+    transition:.25s;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    background:var(--main);
+    color:#fff;
+}
+
+body.dark .main-nav a.active {
+    color:#241307;
+    background:var(--gold);
+}
+
+.header-bottom {
+    border-top:1px solid var(--line);
+}
+
+.header-bottom-inner {
+    width:100%;
+    min-height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:800px;
+    direction:rtl;
+}
+
+.header-actions,.header-settings {
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.header-actions {direction:ltr}
+
+.tool {
+    width:40px;
+    height:40px;
+    display:inline-grid;
+    place-items:center;
+    padding:0;
+    border:1px solid var(--line);
+    border-radius:50%;
+    background:var(--card);
+    color:var(--text);
+    transition:.25s;
+}
+
+.tool:hover {
+    background:var(--soft);
+    border-color:var(--gold);
+    transform:translateY(-2px);
+}
+
+.tool svg {
+    width:20px;
+    height:20px;
+    stroke:currentColor;
+    stroke-width:1.7;
+    fill:none;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+#langBtn {
+    min-width:82px;
+    height:40px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:0 13px;
+    border:1px solid #c49a55;
+    border-radius:30px;
+    background:transparent;
+    color:var(--text);
+    font-weight:bold;
+}
+
+/* المحتوى */
+
+main {
+    min-height:65vh;
+    padding:30px 0 45px;
+}
+
+.breadcrumb {
+    margin-bottom:22px;
+    color:var(--muted);
+    font-size:13px;
+}
+
+.breadcrumb a {color:var(--main)}
+
+.page-heading {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:22px;
+}
+
+.page-heading h1 {
+    margin:0;
+    font-size:27px;
+}
+
+.page-heading p {
+    margin:8px 0 0;
+    color:var(--muted);
+    font-size:13px;
+}
+
+.count {
+    padding:9px 15px;
+    border:1px solid var(--line);
+    border-radius:25px;
+    background:var(--soft);
+    color:var(--main);
+    font-size:13px;
+    white-space:nowrap;
+}
+
+/* أدوات البحث والتصفية */
+
+.filter-panel {
+    padding:20px;
+    margin-bottom:25px;
+    border:1px solid var(--line);
+    border-radius:17px;
+    background:var(--card);
+    box-shadow:var(--shadow);
+}
+
+.search-row {
+    display:grid;
+    grid-template-columns:1fr 230px;
+    gap:12px;
+}
+
+.search-box {
+    position:relative;
+}
+
+.search-box input {
+    width:100%;
+    height:48px;
+    padding:0 45px 0 15px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    outline:none;
+    background:var(--bg);
+    color:var(--text);
+}
+
+.search-box input:focus,
+.sort-select:focus {
+    border-color:var(--gold);
+    box-shadow:0 0 0 3px #c78a3d22;
+}
+
+.search-box svg {
+    position:absolute;
+    right:15px;
+    top:14px;
+    width:20px;
+    height:20px;
+    stroke:var(--muted);
+    fill:none;
+    stroke-width:1.8;
+}
+
+.sort-select {
+    width:100%;
+    height:48px;
+    padding:0 13px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--bg);
+    color:var(--text);
+    outline:none;
+}
+
+.filter-label {
+    margin:20px 0 12px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.category-filters {
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+}
+
+.filter-btn {
+    padding:9px 18px;
+    border:1px solid var(--line);
+    border-radius:25px;
+    background:var(--soft);
+    color:var(--text);
+    font-size:13px;
+    transition:.2s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background:var(--main);
+    color:#fff;
+    border-color:var(--main);
+}
+
+body.dark .filter-btn.active {
+    background:var(--gold);
+    color:#241307;
+    border-color:var(--gold);
+}
+
+/* شبكة المنتجات */
+
+.products {
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:17px;
+}
+
+.product {
+    position:relative;
+    min-width:0;
+    padding:13px;
+    border:1px solid var(--line);
+    border-radius:17px;
+    background:var(--card);
+    text-align:center;
+    box-shadow:var(--shadow);
+    transition:.25s;
+}
+
+.product:hover {
+    transform:translateY(-5px);
+    border-color:var(--gold);
+}
+
+.product-image {
+    height:210px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    border-radius:12px;
+    background:var(--soft);
+}
+
+.product-image img {
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    transition:transform .4s;
+}
+
+.product:hover .product-image img {
+    transform:scale(1.06);
+}
+
+.product h3 {
+    min-height:42px;
+    margin:13px 0 7px;
+    font-size:16px;
+    line-height:1.6;
+}
+
+.product .price {
+    margin:9px 0 13px;
+    font-weight:bold;
+    color:var(--main);
+}
+
+.old {
+    margin-inline-start:7px;
+    color:var(--muted);
+    font-size:12px;
+    font-weight:normal;
+    text-decoration:line-through;
+}
+
+.badge {
+    position:absolute;
+    top:20px;
+    right:20px;
+    z-index:2;
+    padding:5px 11px;
+    border-radius:20px;
+    background:var(--main);
+    color:white;
+    font-size:11px;
+}
+
+.product-actions {
+    display:flex;
+    gap:8px;
+}
+
+.btn {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    padding:11px 18px;
+    border:0;
+    border-radius:25px;
+    background:linear-gradient(100deg,#642307,var(--main));
+    color:#fff;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.btn:hover {
+    transform:translateY(-2px);
+    opacity:.92;
+}
+
+body.dark .btn {
+    background:linear-gradient(100deg,#f5d18c,#c98532);
+    color:#241307;
+}
+
+.product .btn {
+    flex:1;
+    padding:10px 7px;
+    font-size:12px;
+}
+
+.details-btn {
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:25px;
+    background:var(--soft);
+    color:var(--text);
+    font-size:12px;
+}
+
+/* لا توجد منتجات */
+
+.empty-state {
+    display:none;
+    padding:55px 20px;
+    margin-top:20px;
+    border:1px dashed var(--line);
+    border-radius:17px;
+    background:var(--card);
+    text-align:center;
+}
+
+.empty-state .empty-icon {
+    font-size:45px;
+    margin-bottom:12px;
+}
+
+.empty-state h2 {
+    color:var(--main);
+}
+
+.empty-state p {
+    color:var(--muted);
+}
+
+/* الفوتر */
+
+.site-footer {
+    margin-top:35px;
+    padding-top:28px;
+    background:#251912;
+    color:#f5eadd;
+}
+
+.footer-content {
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1.2fr 1fr;
+    gap:22px;
+    padding-bottom:22px;
+}
+
+.footer-brand {text-align:center}
+
+.footer-brand img {
+    width:75px;
+    height:75px;
+    margin-bottom:7px;
+    padding:4px;
+    border-radius:50%;
+    background:#fff;
+    object-fit:contain;
+}
+
+.footer-brand h3 {
+    margin:4px 0;
+    color:#d6ad70;
+    font-size:18px;
+}
+
+.footer-brand>span {
+    color:#c9a36c;
+    font-size:10px;
+    letter-spacing:1.5px;
+}
+
+.footer-brand p {
+    margin-top:8px;
+    color:#d4c4b4;
+    font-size:12px;
+    line-height:1.7;
+}
+
+.site-footer h3 {
+    margin-bottom:13px;
+    color:#d6ad70;
+    font-size:15px;
+}
+
+.footer-links,.footer-contact,.footer-branches {
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.footer-links a,.footer-contact a {
+    margin-bottom:8px;
+    color:#e5d7c8;
+    font-size:12px;
+    transition:.3s;
+}
+
+.footer-links a:hover,.footer-contact a:hover {
+    color:#d6ad70;
+}
+
+.footer-contact p,.footer-branches p {
+    display:flex;
+    align-items:flex-start;
+    gap:11px;
+    margin:0 0 9px;
+    color:#e5d7c8;
+    font-size:12px;
+    line-height:1.6;
+}
+
+.footer-contact svg,.footer-branches svg {
+    width:21px;
+    height:21px;
+    min-width:21px;
+    fill:none;
+    stroke:#d6ad70;
+    stroke-width:1.7;
+}
+
+.footer-contact a {
+    direction:ltr;
+    unicode-bidi:plaintext;
+}
+
+.footer-whatsapp {
+    margin-top:5px;
+    padding:7px 13px;
+    border-radius:25px;
+    background:#c49a55;
+    color:#251912!important;
+    font-size:12px!important;
+    font-weight:bold;
+}
+
+.footer-bottom {
+    padding:12px 10px;
+    border-top:1px solid #d6ad7033;
+    color:#bca995;
+    font-size:11px;
+    text-align:center;
+}
+
+/* زر العودة للأعلى */
+
+.back-to-top {
+    position:fixed;
+    bottom:25px;
+    left:25px;
+    z-index:999;
+    width:48px;
+    height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid #ffe1a5;
+    border-radius:50%;
+    background:linear-gradient(135deg,#e5b65e,#a65318,#c78a3d);
+    color:#fff;
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(15px);
+    transition:.3s;
+    box-shadow:0 0 12px #daa04699,0 0 28px #daa04666;
+}
+
+.back-to-top.show {
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+}
+
+.back-to-top svg {
+    width:22px;
+    height:22px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:2;
+}
+
+/* الشاشات الصغيرة */
+
+@media(max-width:900px) {
+    .products {grid-template-columns:repeat(3,minmax(0,1fr))}
+    .footer-content {grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:650px) {
+    .headin {min-height:68px;padding:8px 0}
+    .brandname {font-size:18px}
+    .brand small {font-size:8px;letter-spacing:1px}
+    .brand-logo-frame {width:80px;height:80px;min-width:80px}
+    .header-bottom-inner {min-height:43px}
+    .header-actions,.header-settings {gap:7px}
+    .header-actions .tool {width:35px;height:35px}
+    .navigation-wrap {padding:0 10px 10px}
+    .main-nav {
+        width:100%;
+        justify-content:flex-start;
+        gap:4px;
+        padding:5px;
+        overflow-x:auto;
+        scrollbar-width:none;
+    }
+    .main-nav::-webkit-scrollbar {display:none}
+    .main-nav a {padding:9px 13px;font-size:12px}
+    main {padding-top:20px}
+    .page-heading h1 {font-size:21px}
+    .search-row {grid-template-columns:1fr}
+    .products {
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:9px;
+    }
+    .product {padding:9px;overflow:hidden}
+    .product-image {height:155px}
+    .product h3 {font-size:14px}
+    .product .btn {font-size:11px}
+    .product-actions {flex-direction:column}
+    .footer-contact a {overflow-wrap:anywhere}
+    .back-to-top {
+        width:43px;height:43px;
+        bottom:18px;left:15px;
+    }
+}
+
+@media(max-width:550px) {
+    .footer-content {
+        grid-template-columns:1fr;
+        gap:20px;
+        text-align:center;
+    }
+    .footer-links,.footer-contact,.footer-branches {
+        align-items:center;
+    }
+}
+.language-icon {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+}
+</style>
+</head>
+
+<body>
+
+<button id="backToTop" class="back-to-top" aria-label="العودة للأعلى">
+    <svg viewBox="0 0 24 24">
+        <path d="M12 19V5"/>
+        <path d="m5 12 7-7 7 7"/>
+    </svg>
+</button>
+
+<!-- الهيدر -->
+<header class="main-header">
+
+    <div class="wrap headin">
+        <a class="brand" href="index.html">
+            <span class="brand-info">
+                <span class="brandname">المزن للعطور</span>
+                <small>ALMUZN FOR PERFUME</small>
+            </span>
+            <span class="brand-logo-frame">
+                <img src="imges/logo.png" class="brand-logo" alt="المزن للعطور">
+            </span>
+        </a>
+    </div>
+
+    <div class="navigation-wrap">
+        <nav class="main-nav">
+            <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+            <a href="products.html" data-ar="جميع العطور" data-en="All Perfumes">جميع العطور</a>
+            <a href="products.html?category=men" data-ar="رجالي" data-en="Men">رجالي</a>
+            <a href="products.html?category=women" data-ar="نسائي" data-en="Women">نسائي</a>
+            <a href="products.html?category=offers" data-ar="العروض" data-en="Offers">العروض</a>
+        </nav>
+    </div>
+
+    <div class="header-bottom">
+        <div class="wrap header-bottom-inner">
+
+            <div class="header-actions">
+                <button class="tool" id="headerSearch" type="button" aria-label="البحث">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="10.8" cy="10.8" r="6.8"/>
+                        <path d="m16 16 5 5"/>
+                    </svg>
+                </button>
+
+                <a class="tool" href="cart.html" aria-label="السلة">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 4h2l2.5 11h11L21 8H6"/>
+                        <circle cx="9" cy="19" r="1.5"/>
+                        <circle cx="17" cy="19" r="1.5"/>
+                    </svg>
+                </a>
+            </div>
+
+             <div class="header-settings">
+    <button class="tool" id="langBtn" type="button" aria-label="تغيير اللغة">
+        <svg class="language-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9.5"/>
+            <path d="M2.8 12h18.4"/>
+            <path d="M12 2.5c2.5 2.6 3.8 5.8 3.8 9.5s-1.3 6.9-3.8 9.5"/>
+            <path d="M12 2.5C9.5 5.1 8.2 8.3 8.2 12s1.3 6.9 3.8 9.5"/>
+        </svg>
+        <span id="langLabel">EN</span>
+    </button>
+
+    <button class="tool" id="themeBtn" type="button" aria-label="تغيير الوضع">◐</button>
+</div>
+
+        </div>
+    </div>
+</header>
+
+<!-- محتوى الصفحة -->
+<main class="wrap">
+
+    <div class="breadcrumb">
+        <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+        <span> / </span>
+        <span data-ar="جميع العطور" data-en="All Perfumes">جميع العطور</span>
+    </div>
+
+    <div class="page-heading">
+        <div>
+            <h1 data-ar="✥ مجموعة عطور المزن" data-en="✥ ALMUZN Perfume Collection">
+                ✥ مجموعة عطور المزن
+            </h1>
+            <p data-ar="اكتشف تشكيلتنا المختارة من العطور الفاخرة"
+               data-en="Explore our exclusive collection of fragrances">
+                اكتشف تشكيلتنا المختارة من العطور الفاخرة
+            </p>
+        </div>
+
+        <span class="count" id="productCount">0 منتج</span>
+    </div>
+
+    <!-- البحث والتصفية -->
+    <section class="filter-panel">
+
+        <div class="search-row">
+
+            <div class="search-box">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="10.8" cy="10.8" r="6.8"/>
+                    <path d="m16 16 5 5"/>
+                </svg>
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="ابحث عن العطر الذي تريده..."
+                    aria-label="البحث عن العطور">
+            </div>
+
+            <select class="sort-select" id="sortSelect">
+                <option value="default">الترتيب الافتراضي</option>
+                <option value="low">السعر: من الأقل للأعلى</option>
+                <option value="high">السعر: من الأعلى للأقل</option>
+                <option value="name">الاسم أبجدياً</option>
+                <option value="discount">العروض أولاً</option>
+            </select>
+
+        </div>
+
+        <div class="filter-label"
+             data-ar="تصفح حسب القسم"
+             data-en="Browse by Category">
+            تصفح حسب القسم
+        </div>
+
+        <div class="category-filters" id="categoryFilters">
+
+            <button class="filter-btn active" data-category="all"
+                    data-ar="الكل" data-en="All">الكل</button>
+
+            <button class="filter-btn" data-category="men"
+                    data-ar="رجالي" data-en="Men">رجالي</button>
+
+            <button class="filter-btn" data-category="women"
+                    data-ar="نسائي" data-en="Women">نسائي</button>
+
+            <button class="filter-btn" data-category="eastern"
+                    data-ar="شرقي" data-en="Oriental">شرقي</button>
+
+            <button class="filter-btn" data-category="luxury"
+                    data-ar="فاخر" data-en="Luxury">فاخر</button>
+
+            <button class="filter-btn" data-category="incense"
+                    data-ar="مستحضرات معطرة" data-en="Scented Products">مستحضرات معطرة</button>
+
+            <button class="filter-btn" data-category="special"
+                    data-ar="مميز" data-en="Special">مميز</button>
+
+            <button class="filter-btn" data-category="offers"
+                    data-ar="العروض" data-en="Offers">العروض</button>
+
+        </div>
+
+    </section>
+
+    <!-- المنتجات -->
+    <section class="products" id="productsGrid"></section>
+
+    <div class="empty-state" id="emptyState">
+        <div class="empty-icon">🌸</div>
+        <h2 data-ar="لم نعثر على منتجات" data-en="No Products Found">لم نعثر على منتجات</h2>
+        <p data-ar="جرّب تغيير كلمات البحث أو اختيار قسم آخر"
+           data-en="Try another search or category">
+            جرّب تغيير كلمات البحث أو اختيار قسم آخر
+        </p>
+        <button class="btn" id="resetFilters"
+                data-ar="عرض جميع العطور" data-en="Show All Perfumes">
+            عرض جميع العطور
+        </button>
+    </div>
+
+</main>
+
+<!-- الفوتر -->
+<footer class="site-footer">
+
+    <div class="wrap footer-content">
+
+        <div class="footer-brand">
+            <img src="imges/logo.png" alt="شعار المزن للعطور">
+            <h3>المزن للعطور</h3>
+            <span>ALMUZN FOR PERFUME</span>
+            <p>عطور مختارة بعناية لتمنحك حضوراً مميزاً وأناقة تدوم في كل مناسبة.</p>
+        </div>
+
+        <div class="footer-links">
+            <h3 data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
+            <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+            <a href="products.html" data-ar="جميع العطور" data-en="All Perfumes">جميع العطور</a>
+            <a href="products.html?category=men" data-ar="عطور رجالية" data-en="Men's Perfumes">عطور رجالية</a>
+            <a href="products.html?category=women" data-ar="عطور نسائية" data-en="Women's Perfumes">عطور نسائية</a>
+            <a href="products.html?category=offers" data-ar="العروض" data-en="Offers">العروض</a>
+        </div>
+
+        <div class="footer-contact">
+            <h3 data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h3>
+
+            <p>
+                <svg viewBox="0 0 24 24">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"/>
+                </svg>
+                <a href="tel:+249129109531">+249 12 910 9531</a>
+            </p>
+
+            <p>
+                <svg viewBox="0 0 24 24">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                    <path d="m22 7-10 7L2 7"/>
+                </svg>
+                <a href="mailto:Almuznperfume@gmail.com">Almuznperfume@gmail.com</a>
+            </p>
+
+            <a class="footer-whatsapp"
+               href="https://wa.me/249129109531"
+               target="_blank" rel="noopener noreferrer">
+                تواصل عبر واتساب
+            </a>
+        </div>
+
+        <div class="footer-branches">
+            <h3 data-ar="فروعنا" data-en="Our Branches">فروعنا</h3>
+            <p>
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z"/>
+                    <circle cx="12" cy="10" r="2.5"/>
+                </svg>
+                <span data-ar="أم درمان - شارع الوادي - شمال استوب الأبراج - مقابل منى ميكس"
+                      data-en="Omdurman - Al Wadi Street - North of Al Abrag Stop - Opposite Mona Mix">
+                    أم درمان - شارع الوادي - شمال استوب الأبراج - مقابل منى ميكس
+                </span>
+            </p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 المزن للعطور – جميع الحقوق محفوظة</p>
+    </div>
+
+</footer>
+
+<script>
+/* الأدوات */
+const $ = selector => document.querySelector(selector);
+const $$ = selector => [...document.querySelectorAll(selector)];
+
+/* اللغة والثيم */
+let lang = localStorage.getItem('almuzn_lang') || 'ar';
+let theme = localStorage.getItem('almuzn_theme') || 'light';
+
+function setTheme() {
+    document.body.classList.toggle('dark', theme === 'dark');
+}
+
+function setLang() {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+    $$('[data-ar][data-en]').forEach(element => {
+        element.textContent = element.dataset[lang];
+    });
+
+    $('#langBtn').innerHTML = `
+        <span>🌐</span>
+        <span>${lang === 'ar' ? 'EN' : 'عربي'}</span>
+    `;
+
+    $('#searchInput').placeholder =
+        lang === 'ar'
+        ? 'ابحث عن العطر الذي تريده...'
+        : 'Search for a perfume...';
+
+    updateCount();
+    renderProducts();
+}
+
+$('#themeBtn').addEventListener('click', () => {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('almuzn_theme', theme);
+    setTheme();
+});
+
+$('#langBtn').addEventListener('click', () => {
+    lang = lang === 'ar' ? 'en' : 'ar';
+    localStorage.setItem('almuzn_lang', lang);
+    setLang();
+});
+
+/* قراءة البيانات المشتركة مع الصفحة الرئيسية */
+function read(key, defaultValue) {
+    try {
+        return JSON.parse(localStorage.getItem(key)) ?? defaultValue;
+    } catch (error) {
+        return defaultValue;
+    }
+}
+
+/* المنتجات الافتراضية: نفس بنية الصفحة الرئيسية */
+let catalog = read('almuzn_products', [
+    {
+        id:'p1',
+        name:'عبير الفخامة',
+        en:'Abeer Al-Fakhama',
+        price:1050,
+        old:1300,
+        category:'women',
+        image:'imges/product-1.webp',
+        stock:12,
+        desc:'عطر أنيق بلمسات دافئة وثبات مميز.'
+    },
+    {
+        id:'p2',
+        name:'سحر العطور',
+        en:'Perfume Magic',
+        price:920,
+        old:1100,
+        category:'men',
+        image:'imges/product-2.webp',
+        stock:8,
+        desc:'تركيبة عطرية جذابة للمناسبات.'
+    },
+    {
+        id:'p3',
+        name:'ورود المزن',
+        en:'Worood Al-Muzn',
+        price:870,
+        old:1000,
+        category:'women',
+        image:'imges/product-3.webp',
+        stock:15,
+        desc:'نفحات زهرية ناعمة ومنعشة.'
+    },
+    {
+        id:'p4',
+        name:'عود النخبة',
+        en:'Oud Al-Nukhba',
+        price:950,
+        old:1200,
+        category:'eastern',
+        image:'imges/product-4.webp',
+        stock:6,
+        desc:'عبق شرقي غني وفاخر.'
+    }
+]);
+
+/* السلة المشتركة */
+function cart() {
+    return read('almuzn_cart', []);
+}
+
+function saveCart(items) {
+    localStorage.setItem('almuzn_cart', JSON.stringify(items));
+}
+
+function addCart(id) {
+    let items = cart();
+
+    let existing = items.find(item => String(item.id) === String(id));
+
+    if (existing) {
+        existing.qty++;
+    } else {
+        items.push({id:id,qty:1});
+    }
+
+    saveCart(items);
+
+    alert(lang === 'ar'
+        ? 'تمت الإضافة إلى السلة بنجاح'
+        : 'Product added to cart successfully');
+}
+
+/* تنسيق السعر */
+function formatPrice(price) {
+    return Number(price || 0).toLocaleString(
+        lang === 'ar' ? 'ar' : 'en'
+    ) + (lang === 'ar' ? ' ج.س' : ' SDG');
+}
+
+/* حماية النصوص المعروضة */
+function safeText(value) {
+    return String(value ?? '').replace(/[&<>"']/g, char => ({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#39;'
+    }[char]));
+}
+
+/* حالة التصفية */
+let selectedCategory = 'all';
+
+function getFilteredProducts() {
+    let search = $('#searchInput').value.trim().toLowerCase();
+
+    let result = catalog.filter(product => {
+        let name = String(product.name || '').toLowerCase();
+        let englishName = String(product.en || '').toLowerCase();
+        let category = String(product.category || '').toLowerCase();
+
+        let matchesSearch =
+            !search ||
+            name.includes(search) ||
+            englishName.includes(search);
+
+        let matchesCategory =
+            selectedCategory === 'all' ||
+            (selectedCategory === 'offers'
+                ? Number(product.old) > Number(product.price)
+                : category === selectedCategory);
+
+        return matchesSearch && matchesCategory;
+    });
+
+    let sort = $('#sortSelect').value;
+
+    if (sort === 'low') {
+        result.sort((a,b) => Number(a.price) - Number(b.price));
+    } else if (sort === 'high') {
+        result.sort((a,b) => Number(b.price) - Number(a.price));
+    } else if (sort === 'name') {
+        result.sort((a,b) => {
+            let first = lang === 'ar' ? a.name : (a.en || a.name);
+            let second = lang === 'ar' ? b.name : (b.en || b.name);
+            return String(first).localeCompare(String(second));
+        });
+    } else if (sort === 'discount') {
+        result.sort((a,b) =>
+            (Number(b.old) > Number(b.price) ? 1 : 0) -
+            (Number(a.old) > Number(a.price) ? 1 : 0)
+        );
+    }
+
+    return result;
+}
+
+/* إنشاء بطاقة المنتج */
+function productCard(product) {
+    let hasDiscount = Number(product.old) > Number(product.price);
+    let name = lang === 'ar' ? product.name : (product.en || product.name);
+    let safeName = safeText(name);
+    let id = safeText(product.id);
+    let image = safeText(product.image || '');
+
+    return `
+        <article class="product">
+
+            ${hasDiscount
+                ? `<span class="badge">${lang === 'ar' ? 'عرض خاص' : 'Special Offer'}</span>`
+                : ''}
+
+            <a href="product-details.html?id=${encodeURIComponent(product.id)}">
+
+                <div class="product-image">
+                    <img
+                        src="${image}"
+                        alt="${safeName}"
+                        loading="lazy"
+                        decoding="async"
+                        onerror="this.style.opacity='.12'">
+                </div>
+
+                <h3>${safeName}</h3>
+
+            </a>
+
+            <div class="price">
+                ${formatPrice(product.price)}
+                ${hasDiscount
+                    ? `<span class="old">${formatPrice(product.old)}</span>`
+                    : ''}
+            </div>
+
+            <div class="product-actions">
+
+                <button class="btn" type="button"
+                    onclick="addCart('${id}')">
+                    ＋ ${lang === 'ar' ? 'أضف للسلة' : 'Add to Cart'}
+                </button>
+
+                <a class="details-btn"
+                   href="product-details.html?id=${encodeURIComponent(product.id)}">
+                    ${lang === 'ar' ? 'التفاصيل' : 'Details'}
+                </a>
+
+            </div>
+
+        </article>
+    `;
+}
+
+/* عرض المنتجات */
+function renderProducts() {
+    let products = getFilteredProducts();
+    let container = $('#productsGrid');
+    let empty = $('#emptyState');
+
+    container.innerHTML = products.map(productCard).join('');
+
+    empty.style.display = products.length ? 'none' : 'block';
+
+    updateCount();
+}
+
+function updateCount() {
+    let count = $('#productCount');
+    if (!count) return;
+
+    let products = getFilteredProducts();
+
+    count.textContent = lang === 'ar'
+        ? `${products.length} منتج`
+        : `${products.length} products`;
+}
+
+/* أزرار الأقسام */
+$('#categoryFilters').addEventListener('click', event => {
+    let button = event.target.closest('.filter-btn');
+    if (!button) return;
+
+    selectedCategory = button.dataset.category;
+
+    $$('.filter-btn').forEach(item => {
+        item.classList.toggle('active', item === button);
+    });
+
+    renderProducts();
+});
+
+/* البحث والترتيب */
+$('#searchInput').addEventListener('input', renderProducts);
+$('#sortSelect').addEventListener('change', renderProducts);
+
+/* زر البحث في الهيدر */
+$('#headerSearch').addEventListener('click', () => {
+    $('#searchInput').focus();
+    $('#searchInput').scrollIntoView({behavior:'smooth',block:'center'});
+});
+
+/* إعادة التصفية */
+$('#resetFilters').addEventListener('click', () => {
+    selectedCategory = 'all';
+    $('#searchInput').value = '';
+    $('#sortSelect').value = 'default';
+
+    $$('.filter-btn').forEach(button => {
+        button.classList.toggle('active', button.dataset.category === 'all');
+    });
+
+    renderProducts();
+});
+
+/* قراءة القسم من الرابط */
+const initialCategory =
+    new URLSearchParams(window.location.search).get('category');
+
+if (initialCategory) {
+    let validCategories = [
+        'men','women','eastern','luxury','incense','special','offers'
+    ];
+
+    if (validCategories.includes(initialCategory)) {
+        selectedCategory = initialCategory;
+
+        $$('.filter-btn').forEach(button => {
+            button.classList.toggle(
+                'active',
+                button.dataset.category === selectedCategory
+            );
+        });
+    }
+}
+
+/* تمييز رابط الصفحة */
+$$('.main-nav a').forEach(link => {
+    let url = new URL(link.href, window.location.href);
+    let category = url.searchParams.get('category');
+
+    if (
+        url.pathname.split('/').pop() === 'products.html' &&
+        category === initialCategory
+    ) {
+        link.classList.add('active');
+    }
+});
+
+/* زر العودة للأعلى */
+const backToTop = $('#backToTop');
+
+window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('show', window.scrollY > 300);
+});
+
+backToTop.addEventListener('click', () => {
+    window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* تشغيل الصفحة */
+setTheme();
+setLang();
+renderProducts();
+</script>
+
+</body>
+</html>
