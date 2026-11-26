@@ -2007,10 +2007,10 @@ html[dir="ltr"] .brand {
     <!-- المحتوى الرئيسي -->
 
     <main class="wrap">
-
-        <!-- مساحة البنر الرئيسية -->
- <section class="panel hero" aria-label="مساحة البنر الرئيسي">
-    <div class="hero-slider">
+ 
+<!-- مساحة البنر الرئيسية -->
+<section class="panel hero" aria-label="مساحة البنر الرئيسي">
+    <div class="hero-slider" id="heroSlider">
 
         <img src="imges/hero-1.jpg" class="hero-image active" alt="عطور المزن">
         <img src="imges/hero-2.jpg" class="hero-image" alt="عطور المزن">
@@ -2020,6 +2020,7 @@ html[dir="ltr"] .brand {
 
     </div>
 </section>
+
 
         <!-- أقسام المتجر -->
 
@@ -2803,13 +2804,62 @@ html[dir="ltr"] .brand {
         setLang();
 
         renderProducts();
-        
+   
+/* ===== HERO SLIDER - ADMIN CONTROL ===== */
+
 document.addEventListener("DOMContentLoaded", function () {
 
-    const heroImages = document.querySelectorAll(".hero-image");
+    const slider = document.getElementById("heroSlider");
+
+    if (!slider) return;
+
+    const defaultImages = [
+        "imges/hero-1.jpg",
+        "imges/hero-2.jpg",
+        "imges/hero-3.jpg",
+        "imges/hero-4.jpg",
+        "imges/hero-5.jpg"
+    ];
+
+    let settings = [];
+
+    try {
+        settings = JSON.parse(
+            localStorage.getItem("almuzn_hero_settings")
+        );
+    } catch (error) {
+        settings = [];
+    }
+
+    if (!Array.isArray(settings) || !settings.length) {
+        settings = defaultImages.map((src, index) => ({
+            src: src,
+            active: true,
+            order: index
+        }));
+    }
+
+    const activeImages = settings.filter(item => item.active);
+
+    slider.innerHTML = "";
+
+    activeImages.forEach((item, index) => {
+
+        const img = document.createElement("img");
+
+        img.src = item.src;
+        img.className = "hero-image" + (index === 0 ? " active" : "");
+        img.alt = "عطور المزن";
+
+        slider.appendChild(img);
+
+    });
+
+    const heroImages = slider.querySelectorAll(".hero-image");
+
     let currentHero = 0;
 
-    if (heroImages.length === 0) return;
+    if (heroImages.length <= 1) return;
 
     setInterval(function () {
 
@@ -2822,6 +2872,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 4000);
 
 });
+
 
   
 /* ===== ALMUZN LUXURY INTRO SOUND ===== */
@@ -3014,6 +3065,7 @@ backToTop.addEventListener('click', () => {
         behavior: 'smooth'
     });
 });
+
     </script>
 
 </body>
